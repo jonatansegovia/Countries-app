@@ -4,7 +4,7 @@ const { getFromApi, getFromDb } = require('../utils');
 const { Op } = require('sequelize');
 
 const getAllCountries = async (req, res, next) => {
-  const dataQuery = req.query;
+  const { name } = req.query;
 
   try {
     const countriesResult = [];
@@ -15,16 +15,15 @@ const getAllCountries = async (req, res, next) => {
     if (countriesDb.length === 0) {
       const db = await Country.bulkCreate(countriesApi);
 
-      countriesApi.map((c) => countriesResult.push(c.name));
+      countriesApi.forEach((c) => countriesResult.push(c.name));
     } else if (countriesDb.length > 0) {
-      countriesDb.map((c) => countriesResult.push(c.name));
+      countriesDb.forEach((c) => countriesResult.push(c.name));
     }
 
-    if (dataQuery === undefined) {
+    if (!name) {
       return res.send(countriesResult);
     } else {
-      const nameQueryToUp =
-        dataQuery.name.charAt(0).toUpperCase() + dataQuery.name.slice(1);
+      const nameQueryToUp = name.charAt(0).toUpperCase() + name.slice(1);
 
       const nameMatch = await Country.findAll({
         where: {
@@ -44,19 +43,17 @@ const getAllCountries = async (req, res, next) => {
 };
 
 const getCountryByParams = async (req, res, next) => {
-  const idPais = req.params.idPais;
-  const countryIdToUp = idPais.toUpperCase();
-  console.log(countryIdToUp);
+  const countryIdToUp = req.params.idPais.toUpperCase();
 
   try {
-    const countryFound = await Country.findOne({
+    var countryFound = await Country.findOne({
       where: {
         id: countryIdToUp,
       },
-      include: Activities,
+      include: { model: Activities, through: { attributes: [] } },
     });
 
-    res.send(countryFound);
+    Object.values(countryFound) && res.send(countryFound);
   } catch (e) {
     res.send(e);
   }
