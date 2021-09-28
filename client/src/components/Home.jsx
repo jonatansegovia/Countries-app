@@ -1,33 +1,79 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector, useDispatch, connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { getCountries } from '../actions';
 import Card from './Card';
 
-export default function Home() {
-  const dispatch = useDispatch(); //mi auto para ir al reducer
-  const allCountries = useSelector((state) => state.countries); //el estado que quiero traerme cuando llegue data
+function Home({ countries, getCountries }) {
+  // const dispatch = useDispatch(); //mi auto para ir al reducer
+  // const allCountries = useSelector((state) => state.countries); //el estado que quiero traerme cuando llegue data
+  const [name, setName] = useState('');
 
   useEffect(() => {
-    dispatch(getCountries()); //acá dispatcho la acción de solicitar a la api
+    getCountries();
   }, []);
 
-  function handleButton(e) {
-    e.preventDefault();
-    dispatch(getCountries());
-  }
+  const inputHandler = (e) => {
+    setName(e.target.value);
+  };
 
-  console.log(allCountries);
+  console.log(countries);
+  let counterForMap = 0;
 
   return (
     <div>
-      <h1>{allCountries}</h1>
-      <button onClick={handleButton}>CARGAR</button>
-      {allCountries.map((c) => {
-        return <Card name={c.name}></Card>;
-      })}
+      <Link to="/Countries">Countries List</Link>
+      <button
+        onClick={(e) => {
+          inputHandler(e);
+        }}
+        type="text"
+      >
+        Reload Countries
+      </button>
+      <h1>Welcome to Countries App</h1>
+      <input
+        type="text"
+        placeholder="Search for a country..."
+        onChange={(event) => {
+          inputHandler(event);
+        }}
+      />
+      <button>Search</button>
+      <div>
+        <select>
+          <option value="asc">A-Z</option>
+          <option value="desc">Z-A</option>
+          <option value="area">Area of the Country</option>
+        </select>
+        <select>
+          <option value="cont">Continent</option>
+          <option value="act">Activities</option>
+        </select>
+        {countries &&
+          countries.map((c) => {
+            while (counterForMap < 9) {
+              {
+                counterForMap++;
+              }
+              return (
+                <fragment>
+                  <Card flag={c.flag} name={c.name} continent={c.capital} />;
+                </fragment>
+              );
+            }
+          })}
+      </div>
     </div>
+    //MOSTRAR 9 PAÍSES
+    // PAGINADOOOOOOOOOOOOOOOOOO
   );
 }
+
+const mapStateToProps = (state) => {
+  return { countries: state.countries, data: state.data };
+};
+
+export default connect(mapStateToProps, { getCountries })(Home);

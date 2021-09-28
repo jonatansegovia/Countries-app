@@ -1,9 +1,11 @@
 import React from 'react';
 
-export default function Card({ name }) {
+export default function Card({ flag, name, continent }) {
   return (
     <div>
-      <h1>{name}</h1>
+      <img src={flag} width="400px" height="250px"></img>
+      <h2>{name}</h2>
+      <h2>{continent}</h2>
     </div>
   );
 }

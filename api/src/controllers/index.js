@@ -21,7 +21,7 @@ const getAllCountries = async (req, res, next) => {
     }
 
     if (!name) {
-      return res.send(countriesResult);
+      res.send(countriesApi) || res.send(countriesDb);
     } else {
       const nameQueryToUp = name.charAt(0).toUpperCase() + name.slice(1);
 

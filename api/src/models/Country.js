@@ -40,10 +40,10 @@ module.exports = (sequelize) => {
         type: DataTypes.FLOAT,
         defaultValue: 0,
       },
-      population: {
-        type: DataTypes.INTEGER,
-        defaultValue: 0,
-      },
+      // population: {
+      //   type: DataTypes.INTEGER,
+      //   defaultValue: 0,
+      // },
     },
     { timestamps: false }
   );
