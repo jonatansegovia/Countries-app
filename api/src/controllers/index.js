@@ -8,15 +8,12 @@ const getAllCountries = async (req, res, next) => {
 
   try {
     const countriesResult = [];
-
     const countriesDb = await getFromDb();
 
-    if (countriesDb.length > 0) {
-      countriesDb.forEach((c) => countriesResult.push(c.name));
-    }
+    countriesDb.forEach((c) => countriesResult.push(c.name));
 
     if (!name) {
-      res.send(countriesDb);
+      return res.send(countriesDb);
     } else {
       const nameQueryToUp = name.charAt(0).toUpperCase() + name.slice(1);
 

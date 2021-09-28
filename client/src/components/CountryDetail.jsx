@@ -1,15 +1,24 @@
 import React from 'react';
 import { useParams } from 'react-router';
-import { useDispatch, useSelector } from 'react-redux';
+import { useEffect } from 'react';
+import { useDispatch, connect } from 'react-redux';
 
 import { getCountryByParams } from '../actions';
 
-export default function CountryDetail() {
+function CountryDetail({ country, getCountryByParams }) {
   const { idPais } = useParams();
-  //   const country = useSelector((state) => state.country);
-  const dispatch = useDispatch();
-  dispatch(getCountryByParams(idPais));
+
+  useEffect(() => {
+    getCountryByParams(idPais);
+  }, []);
+
   //   console.log(idPais);
   //   console.log(country);
-  return <div>{'hola'}</div>;
+  return <div>{country.name}</div>;
 }
+
+const mapStateToProps = (state) => {
+  return { country: state.country };
+};
+
+export default connect(mapStateToProps, { getCountryByParams })(CountryDetail);
