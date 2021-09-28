@@ -7,7 +7,7 @@ const getFromApi = async () => {
     return {
       name: d.name.common,
       id: d.cca3,
-      flag: d.flags[1],
+      flag: d.flags[0],
       continent: d.region,
       capital: d.capital && d.capital[0],
       subregion: d.subregion,
@@ -15,6 +15,8 @@ const getFromApi = async () => {
       population: d.population,
     };
   });
+
+  const db = await Country.bulkCreate(dataFromApi);
 
   return dataFromApi;
 };

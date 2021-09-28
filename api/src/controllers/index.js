@@ -1,5 +1,5 @@
 const { Country, Activities } = require('../db.js');
-const { getFromApi, getFromDb } = require('../utils');
+const { getFromDb } = require('../utils');
 
 const { Op } = require('sequelize');
 
@@ -10,18 +10,13 @@ const getAllCountries = async (req, res, next) => {
     const countriesResult = [];
 
     const countriesDb = await getFromDb();
-    const countriesApi = await getFromApi();
 
-    if (countriesDb.length === 0) {
-      const db = await Country.bulkCreate(countriesApi);
-
-      countriesApi.forEach((c) => countriesResult.push(c.name));
-    } else if (countriesDb.length > 0) {
+    if (countriesDb.length > 0) {
       countriesDb.forEach((c) => countriesResult.push(c.name));
     }
 
     if (!name) {
-      res.send(countriesApi) || res.send(countriesDb);
+      res.send(countriesDb);
     } else {
       const nameQueryToUp = name.charAt(0).toUpperCase() + name.slice(1);
 

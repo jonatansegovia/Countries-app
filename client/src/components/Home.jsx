@@ -1,26 +1,41 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { useSelector, useDispatch, connect } from 'react-redux';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { getCountries } from '../actions';
 import Card from './Card';
+import Pagination from './Pagination';
 
 function Home({ countries, getCountries }) {
-  // const dispatch = useDispatch(); //mi auto para ir al reducer
-  // const allCountries = useSelector((state) => state.countries); //el estado que quiero traerme cuando llegue data
   const [name, setName] = useState('');
 
+  //--Pagination
+  const [loading, setLoading] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [countriesPerPage, setCountriesPerPage] = useState(9);
+
   useEffect(() => {
+    setLoading(true);
     getCountries();
-  }, []);
+    setLoading(false);
+  }, [setLoading]);
+
+  const indexOfLastCountry = currentPage * countriesPerPage;
+  const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
+  const currentCountry = countries.slice(
+    indexOfFirstCountry,
+    indexOfLastCountry
+  );
+
+  const paginate = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+  //--
 
   const inputHandler = (e) => {
     setName(e.target.value);
   };
-
-  console.log(countries);
-  let counterForMap = 0;
 
   return (
     <div>
@@ -52,28 +67,23 @@ function Home({ countries, getCountries }) {
           <option value="cont">Continent</option>
           <option value="act">Activities</option>
         </select>
-        {countries &&
-          countries.map((c) => {
-            while (counterForMap < 9) {
-              {
-                counterForMap++;
-              }
-              return (
-                <fragment>
-                  <Card flag={c.flag} name={c.name} continent={c.capital} />;
-                </fragment>
-              );
-            }
-          })}
+        <div>
+          <Card countries={currentCountry} loading={loading} />
+        </div>
+        <div>
+          <Pagination
+            countriesPerPage={countriesPerPage}
+            totalCountries={countries.length}
+            paginate={paginate}
+          />
+        </div>
       </div>
     </div>
-    //MOSTRAR 9 PAÍSES
-    // PAGINADOOOOOOOOOOOOOOOOOO
   );
 }
 
 const mapStateToProps = (state) => {
-  return { countries: state.countries, data: state.data };
+  return { countries: state.countries };
 };
 
 export default connect(mapStateToProps, { getCountries })(Home);

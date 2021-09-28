@@ -1,11 +1,26 @@
 import React from 'react';
 
-export default function Card({ flag, name, continent }) {
+import './Card.css';
+
+export default function Card({ countries, loading }) {
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
+
   return (
-    <div>
-      <img src={flag} width="400px" height="250px"></img>
-      <h2>{name}</h2>
-      <h2>{continent}</h2>
-    </div>
+    <ul class="container">
+      {countries.map((c) => (
+        <li key={c.id}>
+          <img
+            alt="flag from country"
+            width="350px"
+            heigth="200px"
+            src={c.flag}
+          ></img>
+          <h2>{c.name}</h2>
+          <h2>{c.continent}</h2>
+        </li>
+      ))}
+    </ul>
   );
 }

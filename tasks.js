@@ -79,3 +79,4 @@
 //*en routes todos los países pero solo las rutas, no entiendo
 //GET /countries/{idPais}: //es por body?
 //no puse id en activities para que tenga un id auto incremental
+//mejorar los ids de actions y reducers
