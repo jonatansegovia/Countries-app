@@ -2,28 +2,36 @@ const axios = require('axios');
 const { Country } = require('../db.js');
 
 const getFromApi = async () => {
-  const { data } = await axios.get('https://restcountries.com/v3/all');
-  const dataFromApi = data.map((d) => {
-    return {
-      name: d.name.common,
-      id: d.cca3,
-      flag: d.flags[0],
-      continent: d.region,
-      capital: d.capital && d.capital[0],
-      subregion: d.subregion,
-      area: d.area,
-      population: d.population,
-    };
-  });
+  try {
+    const { data } = await axios.get('https://restcountries.com/v3/all');
 
-  const db = await Country.bulkCreate(dataFromApi);
+    const dataFromApi = await data.map(async (d) => {
+      const country = {
+        name: d.name.common,
+        id: d.cca3,
+        flag: d.flags[0],
+        continent: d.region,
+        capital: d.capital && d.capital[0],
+        subregion: d.subregion,
+        area: d.area,
+      };
 
-  return dataFromApi;
+      Country.findOrCreate({
+        where: { id: d.cca3 },
+        defaults: country,
+      });
+
+      return country;
+    });
+
+    return dataFromApi;
+  } catch (e) {
+    (e) => console.log(e);
+  }
 };
 
 const getFromDb = async () => {
   const countriesinDb = await Country.findAll();
-
   return countriesinDb;
 };
 

@@ -1,14 +1,16 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getCountries } from '../actions';
+import { getCountries, filterByAlphabet, filterByArea } from '../actions';
+import { filterCountryByContinent } from '../actions';
 import Card from './Card';
 import Pagination from './Pagination';
 
-function Home({ countries, getCountries }) {
-  const [name, setName] = useState('');
+export default function Home() {
+  const dispatch = useDispatch();
+  const allCountries = useSelector((state) => state.countries);
 
   //--Pagination
   const [loading, setLoading] = useState(false);
@@ -17,13 +19,13 @@ function Home({ countries, getCountries }) {
 
   useEffect(() => {
     setLoading(true);
-    getCountries();
+    dispatch(getCountries());
     setLoading(false);
   }, [setLoading]);
 
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-  const currentCountry = countries.slice(
+  const currentCountry = allCountries.slice(
     indexOfFirstCountry,
     indexOfLastCountry
   );
@@ -33,57 +35,79 @@ function Home({ countries, getCountries }) {
   };
   //--
 
-  const inputHandler = (e) => {
-    setName(e.target.value);
+  //--Handlers
+  const handleFilterByContinent = (e) => {
+    dispatch(filterCountryByContinent(e.target.value));
   };
+
+  const [order, setOrder] = useState('');
+  const handleFilterByAlphabet = (value) => {
+    dispatch(filterByAlphabet(value));
+    setOrder(value);
+  };
+
+  const [area, setArea] = useState('');
+  const handleFilterByArea = (value) => {
+    dispatch(filterByArea(value));
+    setArea(value);
+  };
+  //--
 
   return (
     <div>
       <Link to="/Countries">Countries List</Link>
-      <button
-        onClick={(e) => {
-          inputHandler(e);
-        }}
-        type="text"
-      >
-        Reload Countries
-      </button>
+      <button type="text">Reload Countries</button>
       <h1>Welcome to Countries App</h1>
-      <input
-        type="text"
-        placeholder="Search for a country..."
-        onChange={(event) => {
-          inputHandler(event);
-        }}
-      />
+      <input type="text" placeholder="Search for a country..." />
       <button>Search</button>
       <div>
-        <select>
-          <option value="asc">A-Z</option>
-          <option value="desc">Z-A</option>
-          <option value="area">Area of the Country</option>
+        <label htmlFor="forAlphabet">Search by Alphabet: </label>
+        <select
+          id="forAlphabet"
+          onChange={(e) => handleFilterByAlphabet(e.target.value)}
+        >
+          <option value="ascending">A-Z</option>
+          <option value="descending">Z-A</option>
         </select>
-        <select>
-          <option value="cont">Continent</option>
-          <option value="act">Activities</option>
+
+        <label htmlFor="forContinents">Search by Continent: </label>
+        <select id="forContinents" onChange={(e) => handleFilterByContinent(e)}>
+          <option value="All">All Countries</option>
+          <option value="Europe">Europe</option>
+          <option value="Oceania">Oceania</option>
+          <option value="Americas">Americas</option>
+          <option value="Africa">Africa</option>
+          <option value="Asia">Asia</option>
+          <option value="Antarctic">Antarctic</option>
         </select>
-        <div>
-          <Card countries={currentCountry} loading={loading} />
-        </div>
+
+        <label htmlFor="forArea">Search by Area in Millons {'\u33A2'}: </label>
+        <select
+          id="forArea"
+          onChange={(e) => handleFilterByArea(e.target.value)}
+        >
+          <label htmlFor="population">Orden por población: </label>
+          <option value="ascending">Smallest Countries to Biggest</option>
+          <option value="descending">Biggest Countries to Smallest</option>
+        </select>
+
+        <label htmlFor="forActivities">Search by Activity: </label>
+        <select id="forActivities">
+          <option value="All">All Activities</option>
+          <option value="Created">Created Activities</option>
+          <option value="Saved">Saved Activities</option>
+        </select>
         <div>
           <Pagination
             countriesPerPage={countriesPerPage}
-            totalCountries={countries.length}
+            totalCountries={allCountries.length}
             paginate={paginate}
           />
+        </div>
+        <div>
+          <Card countries={currentCountry} loading={loading} />
         </div>
       </div>
     </div>
   );
 }
-
-const mapStateToProps = (state) => {
-  return { countries: state.countries };
-};
-
-export default connect(mapStateToProps, { getCountries })(Home);

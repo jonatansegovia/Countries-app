@@ -7,10 +7,7 @@ const getAllCountries = async (req, res, next) => {
   const { name } = req.query;
 
   try {
-    const countriesResult = [];
     const countriesDb = await getFromDb();
-
-    countriesDb.forEach((c) => countriesResult.push(c.name));
 
     if (!name) {
       return res.send(countriesDb);
@@ -21,6 +18,13 @@ const getAllCountries = async (req, res, next) => {
         where: {
           name: {
             [Op.like]: `%${nameQueryToUp}%`,
+            include: {
+              model: Activities,
+              attributes: ['id', 'name', 'difficulty', 'duration', 'season'],
+              through: {
+                attributes: [],
+              },
+            },
           },
         },
       });
@@ -42,7 +46,19 @@ const getCountryByParams = async (req, res, next) => {
       where: {
         id: countryIdToUp,
       },
-      include: { model: Activities, through: { attributes: [] } },
+      include: {
+        model: Country,
+        attributes: [
+          'name',
+          'id',
+          'flag',
+          'continent',
+          'capital',
+          'subregion',
+          'area',
+        ],
+        through: { attributes: [] },
+      },
     });
 
     Object.values(countryFound) && res.send(countryFound);
@@ -52,16 +68,30 @@ const getCountryByParams = async (req, res, next) => {
 };
 
 const postActivity = async (req, res, next) => {
-  const { name, difficulty, duration, season } = req.body;
+  try {
+    const { name, difficulty, duration, season, inputContries } = req.body;
 
-  const activityCreated = await Activities.create({
-    name,
-    difficulty,
-    duration,
-    season,
-  });
+    const activityCreated = await Activities.create({
+      name,
+      difficulty,
+      duration,
+      season,
+    });
 
-  res.send(activityCreated);
+    //país donde quiero meter actividad by name
+    const dbCountries = await Country.findAll({
+      where: {
+        name: inputContries,
+      },
+    });
+
+    await activityCreated.addCountry(dbCountries);
+
+    return res.status(200).send({ dbCountries, message: 'Actividad Creada' });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).send({ message: 'Falló la creación' });
+  }
 };
 
 module.exports = {
