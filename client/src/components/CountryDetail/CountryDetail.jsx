@@ -3,8 +3,8 @@ import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
-import { getCountryByParams } from '../actions';
-import Card from './Card';
+import { getCountryByParams } from '../../actions';
+import Card from '../Card/Card';
 
 function CountryDetail({ country, getCountryByParams }) {
   const { idPais } = useParams();

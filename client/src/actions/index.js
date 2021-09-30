@@ -43,3 +43,15 @@ export function filterByArea(payload) {
     payload,
   };
 }
+
+export function getSearch(text) {
+  return async function (dispatch) {
+    let json = await axios(`http://localhost:3001/countries?name=${text}`);
+    console.log(text);
+    console.log(json.data);
+    return dispatch({
+      type: 'GET_SEARCH_ONE',
+      payload: json.data,
+    });
+  };
+}

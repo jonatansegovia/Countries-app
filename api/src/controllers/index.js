@@ -16,16 +16,12 @@ const getAllCountries = async (req, res, next) => {
 
       const nameMatch = await Country.findAll({
         where: {
-          name: {
-            [Op.like]: `%${nameQueryToUp}%`,
-            include: {
-              model: Activities,
-              attributes: ['id', 'name', 'difficulty', 'duration', 'season'],
-              through: {
-                attributes: [],
-              },
-            },
-          },
+          name: nameQueryToUp,
+        },
+        include: {
+          model: Activities,
+          attributes: ['name', 'difficulty', 'duration', 'season'],
+          through: { attributes: [] },
         },
       });
 
@@ -46,19 +42,19 @@ const getCountryByParams = async (req, res, next) => {
       where: {
         id: countryIdToUp,
       },
-      include: {
-        model: Country,
-        attributes: [
-          'name',
-          'id',
-          'flag',
-          'continent',
-          'capital',
-          'subregion',
-          'area',
-        ],
-        through: { attributes: [] },
-      },
+      // include: {
+      //   model: Country,
+      //   attributes: [
+      //     'name',
+      //     'id',
+      //     'flag',
+      //     'continent',
+      //     'capital',
+      //     'subregion',
+      //     'area',
+      //   ],
+      //   through: { attributes: [] },
+      // },
     });
 
     Object.values(countryFound) && res.send(countryFound);
@@ -78,7 +74,6 @@ const postActivity = async (req, res, next) => {
       season,
     });
 
-    //país donde quiero meter actividad by name
     const dbCountries = await Country.findAll({
       where: {
         name: inputContries,

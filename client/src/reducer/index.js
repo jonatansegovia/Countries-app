@@ -83,6 +83,11 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: areaFound,
       };
+    case 'GET_SEARCH_ONE':
+      return {
+        ...state,
+        countries: action.payload,
+      };
     default:
       return state;
   }

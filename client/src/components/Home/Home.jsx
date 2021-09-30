@@ -3,10 +3,12 @@ import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { getCountries, filterByAlphabet, filterByArea } from '../actions';
-import { filterCountryByContinent } from '../actions';
-import Card from './Card';
-import Pagination from './Pagination';
+import { getCountries, filterByAlphabet, filterByArea } from '../../actions';
+import { filterCountryByContinent } from '../../actions';
+import Card from '../Card/Card';
+import Pagination from '../Pagination/Pagination';
+
+import './home.css';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -55,11 +57,6 @@ export default function Home() {
 
   return (
     <div>
-      <Link to="/Countries">Countries List</Link>
-      <button type="text">Reload Countries</button>
-      <h1>Welcome to Countries App</h1>
-      <input type="text" placeholder="Search for a country..." />
-      <button>Search</button>
       <div>
         <label htmlFor="forAlphabet">Search by Alphabet: </label>
         <select

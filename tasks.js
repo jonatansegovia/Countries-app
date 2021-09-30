@@ -75,8 +75,9 @@
 //  Posibilidad de seleccionar/agregar varios países en simultaneo
 //  Botón/Opción para crear una nueva actividad turística
 
-//!                       --DOUBTS--
-//*en routes todos los países pero solo las rutas, no entiendo
-//GET /countries/{idPais}: //es por body?
-//no puse id en activities para que tenga un id auto incremental
+//?           --MEJORAS--
 //mejorar los ids de actions y reducers
+//modularizar
+//transformar a dispatch y useSelector
+//carpetas para todo
+//borrar console.log

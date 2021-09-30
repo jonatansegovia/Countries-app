@@ -7,6 +7,8 @@ export default function Card({ countries, loading, byParams }) {
     return <h2>Loading...</h2>;
   }
 
+  console.log(byParams);
+
   return (
     <ul className="container">
       {countries.map((c, idx) => (
