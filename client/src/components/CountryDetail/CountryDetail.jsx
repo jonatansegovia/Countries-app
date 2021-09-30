@@ -9,7 +9,7 @@ import Card from '../Card/Card';
 export default function CountryDetail() {
   const { idPais } = useParams();
   const dispatch = useDispatch();
-  const allCountries = useSelector((state) => state.country);
+  const countriesFounded = useSelector((state) => state.country);
 
   const [loading, setLoading] = useState(false);
 
@@ -21,7 +21,11 @@ export default function CountryDetail() {
 
   return (
     <div>
-      <Card countries={[allCountries]} loading={loading} byParams={idPais} />
+      <Card
+        countries={[countriesFounded]}
+        loading={loading}
+        byParams={idPais}
+      />
     </div>
   );
 }

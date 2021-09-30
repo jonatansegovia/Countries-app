@@ -82,3 +82,8 @@
 //carpetas para todo
 //borrar console.log
 //poner la barra de input solo en /home
+//manejar errores (en api y client)
+//return res.send y poner status, también mensajes de error y carga de datos
+//buscar links muertos client
+//separar actions en get and filters
+//input de searchbar no busca  si son mas de 1 palabra y no están exactas, corregir mayus

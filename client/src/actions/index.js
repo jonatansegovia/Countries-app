@@ -3,7 +3,7 @@ import axios from 'axios';
 export function getCountries() {
   return async function (dispatch) {
     var json = await axios('http://localhost:3001/countries');
-    // console.log(json.data);
+    console.log(json.data);
     return dispatch({
       type: 'GET_COUNTRIES',
       payload: json.data,
@@ -14,9 +14,21 @@ export function getCountries() {
 export function getCountryByParams(id) {
   return async function (dispatch) {
     var json = await axios(`http://localhost:3001/countries/${id}`);
-    console.log(json.data);
+    // console.log(json.data);
     return dispatch({
       type: 'GET_COUNTRIES_BY_ID',
+      payload: json.data,
+    });
+  };
+}
+
+export function getSearch(text) {
+  return async function (dispatch) {
+    let json = await axios(`http://localhost:3001/countries?name=${text}`);
+    console.log(text);
+    // console.log(json.data);
+    return dispatch({
+      type: 'GET_SEARCH_ONE',
       payload: json.data,
     });
   };
@@ -41,17 +53,5 @@ export function filterByArea(payload) {
   return {
     type: 'FILTER_BY_AREA',
     payload,
-  };
-}
-
-export function getSearch(text) {
-  return async function (dispatch) {
-    let json = await axios(`http://localhost:3001/countries?name=${text}`);
-    console.log(text);
-    console.log(json.data);
-    return dispatch({
-      type: 'GET_SEARCH_ONE',
-      payload: json.data,
-    });
   };
 }

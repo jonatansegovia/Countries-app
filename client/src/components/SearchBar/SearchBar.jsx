@@ -30,8 +30,10 @@ export default function SearchBar() {
         placeholder="Search"
         value={text}
       />
-      <button type="submit">Buscar</button>
-      <Link path="/activity">Create Activiy</Link>
+      <button type="submit" path="/activity">
+        Buscar
+      </button>
+      <Link to="/activity">Create Activiy</Link>
     </form>
   );
 }

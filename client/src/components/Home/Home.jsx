@@ -12,7 +12,7 @@ import './home.css';
 
 export default function Home() {
   const dispatch = useDispatch();
-  const allCountries = useSelector((state) => state.countries);
+  const countriesFounded = useSelector((state) => state.countries);
 
   //--Pagination
   const [loading, setLoading] = useState(false);
@@ -27,7 +27,7 @@ export default function Home() {
 
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
-  const currentCountry = allCountries.slice(
+  const currentCountry = countriesFounded.slice(
     indexOfFirstCountry,
     indexOfLastCountry
   );
@@ -89,7 +89,6 @@ export default function Home() {
           <option value="descending">Biggest Countries to Smallest</option>
         </select>
 
-        <label htmlFor="forActivities">Search by Activity: </label>
         <select id="forActivities">
           <option value="All">All Activities</option>
           <option value="Created">Created Activities</option>
@@ -98,7 +97,7 @@ export default function Home() {
         <div>
           <Pagination
             countriesPerPage={countriesPerPage}
-            totalCountries={allCountries.length}
+            totalCountries={countriesFounded.length}
             paginate={paginate}
           />
         </div>
