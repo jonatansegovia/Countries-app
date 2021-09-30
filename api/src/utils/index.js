@@ -1,5 +1,5 @@
 const axios = require('axios');
-const { Country } = require('../db.js');
+const { Country, Activities } = require('../db.js');
 
 const getFromApi = async () => {
   try {
@@ -31,7 +31,13 @@ const getFromApi = async () => {
 };
 
 const getFromDb = async () => {
-  const countriesinDb = await Country.findAll();
+  const countriesinDb = await Country.findAll({
+    include: {
+      model: Activities,
+      attributes: ['name', 'difficulty', 'duration', 'season'],
+      through: { attributes: [] },
+    },
+  });
   return countriesinDb;
 };
 

@@ -87,3 +87,5 @@
 //buscar links muertos client
 //separar actions en get and filters
 //input de searchbar no busca  si son mas de 1 palabra y no están exactas, corregir mayus
+// uri convertir
+//pasar function a arrow

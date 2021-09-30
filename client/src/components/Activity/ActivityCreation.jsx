@@ -3,61 +3,129 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { getCountries, filterByAlphabet } from '../../actions';
+import { getCountries, filterByAlphabet, postActivity } from '../../actions';
 
 export default function ActivityCreation() {
   const dispatch = useDispatch();
+
+  //--Select Countries Ordered
+  const [forAlphabet, setForAlphabet] = useState(false);
   const countriesFounded = useSelector((state) => state.countries);
-  countriesFounded.length > 0 && dispatch(filterByAlphabet('ascending'));
+
+  if (countriesFounded.length > 0 && forAlphabet === false) {
+    dispatch(filterByAlphabet('ascending'));
+    setForAlphabet(true);
+  }
 
   useEffect(() => {
     dispatch(getCountries());
   }, []);
+  //--
+
+  //!.............................................--Handling Inputs
+  const [inputsForm, setinputsForm] = useState({
+    name: '',
+    difficulty: '',
+    duration: '',
+    season: '',
+    countriesArray: [],
+  });
+
+  function handleInputChange(inputs) {
+    if (inputs.target.name === 'countriesArray') {
+      setinputsForm({
+        ...inputsForm,
+        [inputs.target.name]: [
+          ...inputsForm.countriesArray,
+          inputs.target.value,
+        ],
+      });
+    } else {
+      setinputsForm({
+        ...inputsForm,
+        [inputs.target.name]: inputs.target.value,
+      });
+    }
+  }
 
   const [text, setText] = useState('');
 
-  function handleOnChange(name) {
-    setText(name);
-  }
-
   function handleOnSubmit(e) {
     e.preventDefault();
-    // dispatch(getCountryByParams(text));
+    dispatch(postActivity(inputsForm));
+    // console.log('RESULT: ', inputsForm);
     setText('');
+    setinputsForm({
+      name: '',
+      difficulty: '',
+      duration: '',
+      season: '',
+      countriesArray: [],
+    });
   }
 
-  console.log(countriesFounded, '1234234');
+  const result = useSelector((state) => state.activities);
+  console.log(result);
+
+  //!................................................--
+
   return (
     <div>
       <Link to="/countries">Home</Link>
       <form onSubmit={(e) => handleOnSubmit(e)}>
         <h2>Create a new activity</h2>
-
         <label htmlFor="forName">Name: </label>
-        <input type="text" name="name" id="name" />
-
+        <input
+          type="text"
+          name="name"
+          id="forName"
+          onChange={handleInputChange}
+          value={inputsForm.username}
+        />
         <label htmlFor="forDifficulty">Difficulty: </label>
-        <input type="number" name="dificulty" id="dificulty" min="0" max="5" />
-
+        <input
+          type="number"
+          name="difficulty"
+          id="forDifficulty"
+          min="0"
+          max="5"
+          onChange={handleInputChange}
+          value={inputsForm.difficulty || 0}
+        />
         <label htmlFor="forDuration">Duration (min): </label>
-        <input type="text" name="duration" id="duration" min="0" max="5" />
-
+        <input
+          type="text"
+          name="duration"
+          id="forDuration"
+          onChange={handleInputChange}
+          value={inputsForm.duration}
+        />
         <label htmlFor="forActivities">Season: </label>
-        <select id="forActivities" onChange={(e) => handleOnChange(e)}>
+        <select
+          onChange={(e) => handleInputChange(e)}
+          name="season"
+          id="forActivities"
+        >
           <option value="spring">Spring</option>
           <option value="summer">Summer</option>
           <option value="winter">Winter</option>
           <option value="autumn">Autumn</option>
         </select>
-
         <label htmlFor="forCountries">Países: </label>
-        <select name="forCountries" id="forCountries">
+        <select
+          name="countriesArray"
+          id="forCountries"
+          onChange={(e) => handleInputChange(e)}
+        >
           {countriesFounded.map((c) => (
-            <option key={c.id} value={c.id}>
+            <option key={c.id} value={c.name}>
               {c.name}
             </option>
           ))}
         </select>
+        <button type="submit" onClick={handleOnSubmit}>
+          CREATE
+        </button>
       </form>
     </div>
   );

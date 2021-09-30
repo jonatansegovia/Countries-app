@@ -2,6 +2,7 @@ const initialState = {
   countries: [],
   country: [],
   countriesBackUp: [],
+  activities: [],
 };
 
 function rootReducer(state = initialState, action) {
@@ -22,6 +23,11 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         countries: action.payload,
+      };
+    case 'GET_ACTIVITIES':
+      return {
+        ...state,
+        activities: action.payload,
       };
     case 'FILTER_CONTINENT':
       const allCountries = state.countriesBackUp;
@@ -85,6 +91,15 @@ function rootReducer(state = initialState, action) {
       return {
         ...state,
         countries: areaFound,
+      };
+    case 'FILTER_CREATED':
+      const createdFilter =
+        action.payload === 'created'
+          ? state.countriesBackUp.filter((c) => c.fromDB)
+          : state.countriesBackUp.filter((c) => !c.fromDB);
+      return {
+        ...state,
+        countries: createdFilter,
       };
 
     default:

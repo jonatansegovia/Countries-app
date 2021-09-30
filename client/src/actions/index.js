@@ -1,57 +1,97 @@
 import axios from 'axios';
 
-export function getCountries() {
+export const getCountries = () => {
   return async function (dispatch) {
-    var json = await axios('http://localhost:3001/countries');
-    console.log(json.data);
-    return dispatch({
-      type: 'GET_COUNTRIES',
-      payload: json.data,
-    });
+    try {
+      var json = await axios('http://localhost:3001/countries');
+      return dispatch({
+        type: 'GET_COUNTRIES',
+        payload: json.data,
+      });
+    } catch (e) {
+      console.error('ERROR', e);
+    }
   };
-}
+};
 
-export function getCountryByParams(id) {
+export const getCountryByParams = (id) => {
   return async function (dispatch) {
-    var json = await axios(`http://localhost:3001/countries/${id}`);
-    // console.log(json.data);
-    return dispatch({
-      type: 'GET_COUNTRIES_BY_ID',
-      payload: json.data,
-    });
+    try {
+      var json = await axios(`http://localhost:3001/countries/${id}`);
+      return dispatch({
+        type: 'GET_COUNTRIES_BY_ID',
+        payload: json.data,
+      });
+    } catch (e) {
+      console.error('ERROR', e);
+    }
   };
-}
+};
 
-export function getSearch(text) {
+export const getSearch = (text) => {
   return async function (dispatch) {
-    let json = await axios(`http://localhost:3001/countries?name=${text}`);
-    console.log(text);
-    // console.log(json.data);
-    return dispatch({
-      type: 'GET_SEARCH_ONE',
-      payload: json.data,
-    });
+    try {
+      let json = await axios(`http://localhost:3001/countries?name=${text}`);
+      return dispatch({
+        type: 'GET_SEARCH_ONE',
+        payload: json.data,
+      });
+    } catch (e) {
+      console.error('ERROR', e);
+    }
   };
-}
+};
 
-export function filterCountryByContinent(payload) {
-  console.log(payload);
+export const getActivities = () => {
+  return async function (dispatch) {
+    try {
+      const json = await axios('http://localhost:3001/activity');
+      return dispatch({
+        type: 'GET_ACTIVITIES',
+        payload: json.data,
+      });
+    } catch (e) {
+      console.log(e);
+    }
+  };
+};
+
+export const filterCountryByContinent = (payload) => {
   return {
     type: 'FILTER_CONTINENT',
     payload,
   };
-}
+};
 
-export function filterByAlphabet(payload) {
+export const filterByAlphabet = (payload) => {
   return {
     type: 'FILTER_BY_ALPHABET',
     payload,
   };
-}
+};
 
-export function filterByArea(payload) {
+export const filterByArea = (payload) => {
   return {
     type: 'FILTER_BY_AREA',
     payload,
   };
-}
+};
+
+export const filterCreated = (payload) => {
+  return {
+    type: 'FILTER_CREATED',
+    payload,
+  };
+};
+
+export const postActivity = (body) => {
+  return async function (dispatch) {
+    try {
+      const json = await axios.post('http://localhost:3001/activity', body);
+      console.log('BODY: ', body);
+      return json;
+    } catch (err) {
+      console.error('ERROR', err);
+    }
+  };
+};

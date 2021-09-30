@@ -2,8 +2,13 @@ import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getCountries, filterByAlphabet, filterByArea } from '../../actions';
-import { filterCountryByContinent } from '../../actions';
+import {
+  getCountries,
+  filterByAlphabet,
+  filterByArea,
+  filterCountryByContinent,
+  filterCreated,
+} from '../../actions';
 import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
 import SearchBar from '../SearchBar/SearchBar';
@@ -53,6 +58,11 @@ export default function Home() {
     dispatch(filterByArea(value));
     setArea(value);
   };
+
+  const handleFilterCreated = (e) => {
+    console.log(e);
+    dispatch(filterCreated(e.target.value));
+  };
   //--
 
   return (
@@ -80,19 +90,19 @@ export default function Home() {
         </select>
 
         <label htmlFor="forArea">Search by Area in Millons {'\u33A2'}: </label>
-        <select
-          id="forArea"
-          onChange={(e) => handleFilterByArea(e.target.value)}
-        >
+        <select id="forArea" onChange={(e) => handleFilterByArea(e)}>
           <label htmlFor="population">Orden por población: </label>
           <option value="ascending">Smallest Countries to Biggest</option>
           <option value="descending">Biggest Countries to Smallest</option>
         </select>
 
-        <select id="forActivities">
+        <select
+          id="forActivities"
+          onChange={(e) => handleFilterCreated(e.target.value)}
+        >
           <option value="All">All Activities</option>
-          <option value="Created">Created Activities</option>
-          <option value="Saved">Saved Activities</option>
+          <option value="created">Created Activities</option>
+          <option value="saved">Saved Activities</option>
         </select>
         <div>
           <Pagination
