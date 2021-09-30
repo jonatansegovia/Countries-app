@@ -1,30 +1,27 @@
 import React from 'react';
 import { useParams } from 'react-router';
 import { useEffect, useState } from 'react';
-import { connect } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { getCountryByParams } from '../../actions';
 import Card from '../Card/Card';
 
-function CountryDetail({ country, getCountryByParams }) {
+export default function CountryDetail() {
   const { idPais } = useParams();
+  const dispatch = useDispatch();
+  const allCountries = useSelector((state) => state.country);
+
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     setLoading(true);
-    getCountryByParams(idPais);
+    dispatch(getCountryByParams(idPais));
     setLoading(false);
   }, [setLoading]);
 
   return (
     <div>
-      <Card countries={[country]} loading={loading} byParams={idPais} />
+      <Card countries={[allCountries]} loading={loading} byParams={idPais} />
     </div>
   );
 }
-
-const mapStateToProps = (state) => {
-  return { country: state.country };
-};
-
-export default connect(mapStateToProps, { getCountryByParams })(CountryDetail);

@@ -81,3 +81,4 @@
 //transformar a dispatch y useSelector
 //carpetas para todo
 //borrar console.log
+//poner la barra de input solo en /home

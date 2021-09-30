@@ -1,12 +1,12 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import { getCountries, filterByAlphabet, filterByArea } from '../../actions';
 import { filterCountryByContinent } from '../../actions';
 import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
+import SearchBar from '../SearchBar/SearchBar';
 
 import './home.css';
 
@@ -57,6 +57,7 @@ export default function Home() {
 
   return (
     <div>
+      <SearchBar />
       <div>
         <label htmlFor="forAlphabet">Search by Alphabet: </label>
         <select
