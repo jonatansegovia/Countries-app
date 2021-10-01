@@ -4,10 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import {
   getCountries,
-  filterByAlphabet,
+  getActivities,
   filterByArea,
+  filterByAlphabet,
   filterCountryByContinent,
-  filterCreated,
+  filterByActivity,
 } from '../../actions';
 import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
@@ -18,6 +19,7 @@ import './home.css';
 export default function Home() {
   const dispatch = useDispatch();
   const countriesFounded = useSelector((state) => state.countries);
+  const allActivities = useSelector((state) => state.activities);
 
   //--Pagination
   const [loading, setLoading] = useState(false);
@@ -27,8 +29,9 @@ export default function Home() {
   useEffect(() => {
     setLoading(true);
     dispatch(getCountries());
+    dispatch(getActivities());
     setLoading(false);
-  }, [setLoading]);
+  }, []);
 
   const indexOfLastCountry = currentPage * countriesPerPage;
   const indexOfFirstCountry = indexOfLastCountry - countriesPerPage;
@@ -54,14 +57,13 @@ export default function Home() {
   };
 
   const [area, setArea] = useState('');
-  const handleFilterByArea = (value) => {
-    dispatch(filterByArea(value));
-    setArea(value);
+  const handleFilterByArea = (e) => {
+    dispatch(filterByArea(e.target.value));
+    setArea(e.target.value);
   };
 
-  const handleFilterCreated = (e) => {
-    console.log(e);
-    dispatch(filterCreated(e.target.value));
+  const handleFilterByActivity = (act) => {
+    dispatch(filterByActivity(act));
   };
   //--
 
@@ -74,12 +76,18 @@ export default function Home() {
           id="forAlphabet"
           onChange={(e) => handleFilterByAlphabet(e.target.value)}
         >
+          <option disabled selected value>
+            ---
+          </option>
           <option value="ascending">A-Z</option>
           <option value="descending">Z-A</option>
         </select>
 
         <label htmlFor="forContinents">Search by Continent: </label>
         <select id="forContinents" onChange={(e) => handleFilterByContinent(e)}>
+          <option disabled selected value>
+            ---
+          </option>
           <option value="All">All Countries</option>
           <option value="Europe">Europe</option>
           <option value="Oceania">Oceania</option>
@@ -91,18 +99,29 @@ export default function Home() {
 
         <label htmlFor="forArea">Search by Area in Millons {'\u33A2'}: </label>
         <select id="forArea" onChange={(e) => handleFilterByArea(e)}>
-          <label htmlFor="population">Orden por población: </label>
+          <option disabled selected value>
+            ---
+          </option>
           <option value="ascending">Smallest Countries to Biggest</option>
           <option value="descending">Biggest Countries to Smallest</option>
         </select>
+        {/* //ARREGLAR ESE DE ARRIBA, NO TRAE NADA */}
 
+        <label htmlFor="forActivities">Search Activities: </label>
         <select
+          name="activity"
           id="forActivities"
-          onChange={(e) => handleFilterCreated(e.target.value)}
+          onChange={(e) => handleFilterByActivity(e.target.value)}
         >
-          <option value="All">All Activities</option>
-          <option value="created">Created Activities</option>
-          <option value="saved">Saved Activities</option>
+          <option disabled selected value>
+            ---
+          </option>
+          {allActivities.length > 0 &&
+            allActivities.map((act) => (
+              <option key={act.id} value={act.name}>
+                {act.name}
+              </option>
+            ))}
         </select>
         <div>
           <Pagination

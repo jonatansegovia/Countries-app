@@ -1,23 +1,24 @@
 const { Country, Activities } = require('../db.js');
 const { getFromDb } = require('../utils');
 
+const { Op } = require('sequelize');
+
 const getAllCountries = async (req, res, next) => {
   const { name } = req.query;
 
   try {
-    console.log(1);
     const countriesDb = await getFromDb();
 
     if (!name) {
-      console.log(2);
       return res.send(countriesDb);
     } else {
-      console.log(3);
-      const nameQueryToUp = name.charAt(0).toUpperCase() + name.slice(1);
+      // const nameQueryToUp = name.charAt(0).toUpperCase() + name.slice(1);
 
       const nameMatch = await Country.findAll({
         where: {
-          name: nameQueryToUp,
+          name: {
+            [Op.iLike]: `%${name}%`,
+          },
         },
         include: {
           model: Activities,
@@ -25,7 +26,6 @@ const getAllCountries = async (req, res, next) => {
           through: { attributes: [] },
         },
       });
-      console.log(4);
       nameMatch.length === 0
         ? res.json({ message: 'Country not found!' })
         : res.send(nameMatch);
@@ -82,18 +82,27 @@ const postActivity = async (req, res, next) => {
       },
     });
 
-    await activityCreated.addCountry(dbCountries);
+    const result = await activityCreated.addCountry(dbCountries);
 
-    return res
-      .status(200)
-      .send({ activityCreated, message: 'Activity Created' });
+    return res.status(200).send({ result, message: 'Activity Created' });
   } catch (e) {
     console.error(e);
     return res.status(400).send({ message: 'Creation Failed' });
   }
 };
 
+const getActivity = async (req, res, next) => {
+  try {
+    const activities = await Activities.findAll();
+    console.log(activities);
+    res.status(200).send(activities);
+  } catch (e) {
+    return res.status(400).send(e);
+  }
+};
+
 module.exports = {
+  getActivity,
   getAllCountries,
   getCountryByParams,
   postActivity,

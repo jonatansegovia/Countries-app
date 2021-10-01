@@ -5,6 +5,7 @@ const { Router } = require('express');
 const router = Router();
 
 const {
+  getActivity,
   getAllCountries,
   getCountryByParams,
   postActivity,
@@ -17,5 +18,6 @@ router.get('/countries', getAllCountries);
 router.get('/countries/:idPais', getCountryByParams);
 
 router.post('/activity', postActivity);
+router.get('/activity', getActivity);
 
 module.exports = router;

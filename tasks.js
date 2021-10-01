@@ -89,3 +89,6 @@
 //input de searchbar no busca  si son mas de 1 palabra y no están exactas, corregir mayus
 // uri convertir
 //pasar function a arrow
+//cambié la posición de flag
+//estoy intentando renderizar cosas creadas en db
+//borrar

@@ -46,12 +46,13 @@ export const getActivities = () => {
   return async function (dispatch) {
     try {
       const json = await axios('http://localhost:3001/activity');
+      // console.log(json.data);
       return dispatch({
         type: 'GET_ACTIVITIES',
         payload: json.data,
       });
     } catch (e) {
-      console.log(e);
+      console.error(e);
     }
   };
 };
@@ -95,3 +96,10 @@ export const postActivity = (body) => {
     }
   };
 };
+
+export function filterByActivity(act) {
+  return {
+    type: 'FILTER_BY_ACTIVITY',
+    payload: act,
+  };
+}

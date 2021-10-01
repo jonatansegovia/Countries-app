@@ -18,14 +18,14 @@ module.exports = (sequelize) => {
         allowNull: false,
         validate: { len: [3] },
       },
-      flag: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
       continent: {
         type: DataTypes.STRING,
         allowNull: false,
         defaultValue: '---',
+      },
+      flag: {
+        type: DataTypes.STRING,
+        allowNull: false,
       },
       capital: {
         type: DataTypes.STRING,
@@ -39,11 +39,6 @@ module.exports = (sequelize) => {
       area: {
         type: DataTypes.FLOAT,
         defaultValue: 0,
-      },
-      fromDB: {
-        type: DataTypes.BOOLEAN,
-        allowNull: false,
-        defaultValue: true,
       },
     },
     { timestamps: false }
