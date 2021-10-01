@@ -1,6 +1,7 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 import {
   getCountries,
@@ -10,6 +11,7 @@ import {
   filterCountryByContinent,
   filterByActivity,
 } from '../../actions';
+
 import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
 import SearchBar from '../SearchBar/SearchBar';
@@ -31,6 +33,7 @@ export default function Home() {
     dispatch(getCountries());
     dispatch(getActivities());
     setLoading(false);
+    setCountriesPerPage(9);
   }, []);
 
   const indexOfLastCountry = currentPage * countriesPerPage;
@@ -65,8 +68,12 @@ export default function Home() {
   const handleFilterByActivity = (act) => {
     dispatch(filterByActivity(act));
   };
-  //--
 
+  //RESTART
+  const handleRestart = () => {
+    dispatch(getCountries());
+  };
+  //--
   return (
     <div>
       <SearchBar />
@@ -116,6 +123,7 @@ export default function Home() {
           <option disabled selected value>
             ---
           </option>
+          {/* renderizado de actividades */}
           {allActivities.length > 0 &&
             allActivities.map((act) => (
               <option key={act.id} value={act.name}>
@@ -123,6 +131,7 @@ export default function Home() {
               </option>
             ))}
         </select>
+        <button onClick={handleRestart}>RESTART</button>
         <div>
           <Pagination
             countriesPerPage={countriesPerPage}
@@ -131,7 +140,11 @@ export default function Home() {
           />
         </div>
         <div>
-          <Card countries={currentCountry} loading={loading} />
+          {countriesFounded.length > 0 ? (
+            <Card countries={currentCountry} loading={loading} />
+          ) : (
+            <span>Ops! Country not found, try again!</span>
+          )}
         </div>
       </div>
     </div>

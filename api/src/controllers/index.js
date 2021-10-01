@@ -26,9 +26,7 @@ const getAllCountries = async (req, res, next) => {
           through: { attributes: [] },
         },
       });
-      nameMatch.length === 0
-        ? res.json({ message: 'Country not found!' })
-        : res.send(nameMatch);
+      nameMatch.length === 0 ? res.json() : res.send(nameMatch);
     }
   } catch (e) {
     console.log(5);

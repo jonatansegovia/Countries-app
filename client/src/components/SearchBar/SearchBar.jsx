@@ -10,7 +10,6 @@ import './searchBar.css';
 export default function SearchBar() {
   const dispatch = useDispatch();
   const [text, setText] = useState('');
-  const state = useSelector((s) => s.countries);
 
   function handleOnChange(name) {
     setText(name);
@@ -22,7 +21,6 @@ export default function SearchBar() {
     setText('');
   }
 
-  console.log(text);
   return (
     <form className="searchBar_container" onSubmit={(e) => handleOnSubmit(e)}>
       <label htmlFor="title">Search a Country</label>
