@@ -12,8 +12,6 @@ const getAllCountries = async (req, res, next) => {
     if (!name) {
       return res.send(countriesDb);
     } else {
-      // const nameQueryToUp = name.charAt(0).toUpperCase() + name.slice(1);
-
       const nameMatch = await Country.findAll({
         where: {
           name: {
@@ -29,7 +27,6 @@ const getAllCountries = async (req, res, next) => {
       nameMatch.length === 0 ? res.json() : res.send(nameMatch);
     }
   } catch (e) {
-    console.log(5);
     return res.send(e);
   }
 };
@@ -65,7 +62,7 @@ const getCountryByParams = async (req, res, next) => {
 
 const postActivity = async (req, res, next) => {
   try {
-    const { name, difficulty, duration, season, inputContries } = req.body;
+    const { name, difficulty, duration, season, inputCountries } = req.body;
 
     const activityCreated = await Activities.create({
       name,
@@ -76,7 +73,7 @@ const postActivity = async (req, res, next) => {
 
     const dbCountries = await Country.findAll({
       where: {
-        name: inputContries,
+        name: inputCountries,
       },
     });
 
@@ -84,7 +81,7 @@ const postActivity = async (req, res, next) => {
 
     return res.status(200).send({ result, message: 'Activity Created' });
   } catch (e) {
-    console.error(e);
+    // console.error(e);
     return res.status(400).send({ message: 'Creation Failed' });
   }
 };

@@ -40,7 +40,7 @@ function rootReducer(state = initialState, action) {
         countries: continentFound,
       };
     case 'FILTER_BY_ALPHABET':
-      const countriesToOrder = state.countriesBackUp;
+      const countriesToOrder = state.countries;
       const orderedCountries = countriesToOrder.sort(function (a, b) {
         if (action.payload === 'ascending') {
           if (a.name < b.name) {
@@ -113,6 +113,8 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: filteredByAct,
       };
+    case 'POST_ACTIVITY':
+      return state;
     default:
       return state;
   }

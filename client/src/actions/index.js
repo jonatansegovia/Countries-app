@@ -85,21 +85,21 @@ export const filterCreated = (payload) => {
   };
 };
 
-export const postActivity = (body) => {
-  return async function (dispatch) {
-    try {
-      const json = await axios.post('http://localhost:3001/activity', body);
-      console.log('BODY: ', body);
-      return json;
-    } catch (err) {
-      console.error('ERROR', err);
-    }
-  };
-};
-
 export function filterByActivity(act) {
   return {
     type: 'FILTER_BY_ACTIVITY',
     payload: act,
   };
 }
+
+export const postActivity = (body) => {
+  return async function (dispatch) {
+    try {
+      const json = await axios.post('http://localhost:3001/activity', body);
+      // console.log('BODY: ', body);
+      return json;
+    } catch (err) {
+      console.error('ERROR', err);
+    }
+  };
+};

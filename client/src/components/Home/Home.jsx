@@ -1,7 +1,6 @@
 import React from 'react';
 import { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 import {
   getCountries,
@@ -22,7 +21,7 @@ export default function Home() {
   const dispatch = useDispatch();
   const countriesFounded = useSelector((state) => state.countries);
   const allActivities = useSelector((state) => state.activities);
-
+  console.log(allActivities);
   //--Pagination
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
@@ -125,9 +124,9 @@ export default function Home() {
           </option>
           {/* renderizado de actividades */}
           {allActivities.length > 0 &&
-            allActivities.map((act) => (
-              <option key={act.id} value={act.name}>
-                {act.name}
+            allActivities.map((a) => (
+              <option key={a.id} value={a.name}>
+                {a.name}
               </option>
             ))}
         </select>

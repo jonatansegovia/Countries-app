@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
@@ -22,21 +22,21 @@ export default function ActivityCreation() {
   }, []);
   //--
 
-  //!.............................................--Handling Inputs
+  //--Handling Inputs
   const [inputsForm, setinputsForm] = useState({
     name: '',
     difficulty: '',
     duration: '',
     season: '',
-    countriesArray: [],
+    inputCountries: [],
   });
 
   function handleInputChange(inputs) {
-    if (inputs.target.name === 'countriesArray') {
+    if (inputs.target.name === 'inputCountries') {
       setinputsForm({
         ...inputsForm,
         [inputs.target.name]: [
-          ...inputsForm.countriesArray,
+          ...inputsForm.inputCountries,
           inputs.target.value,
         ],
       });
@@ -53,22 +53,26 @@ export default function ActivityCreation() {
   function handleOnSubmit(e) {
     e.preventDefault();
     dispatch(postActivity(inputsForm));
-    // console.log('RESULT: ', inputsForm);
     setText('');
     setinputsForm({
       name: '',
       difficulty: '',
       duration: '',
       season: '',
-      countriesArray: [],
+      inputCountries: [],
     });
   }
 
   const result = useSelector((state) => state.activities);
   console.log(result);
+  //--
 
-  //!................................................--
-
+  const restart = () => {
+    setinputsForm({
+      ...inputsForm,
+      inputCountries: [],
+    });
+  };
   return (
     <div>
       <Link to="/countries">Home</Link>
@@ -112,8 +116,9 @@ export default function ActivityCreation() {
           <option value="autumn">Autumn</option>
         </select>
         <label htmlFor="forCountries">Países: </label>
+
         <select
-          name="countriesArray"
+          name="inputCountries"
           id="forCountries"
           onChange={(e) => handleInputChange(e)}
         >
@@ -123,6 +128,12 @@ export default function ActivityCreation() {
             </option>
           ))}
         </select>
+        <p>{inputsForm.inputCountries}</p>
+
+        <button type="reset" onClick={restart}>
+          RESTART
+        </button>
+
         <button type="submit" onClick={handleOnSubmit}>
           CREATE
         </button>
