@@ -5,6 +5,29 @@ import { Link } from 'react-router-dom';
 
 import { getCountries, filterByAlphabet, postActivity } from '../../actions';
 
+function validate(input) {
+  let error = {};
+
+  var regName = /^[a-zA-Z]+$/;
+  var regNumberBetween = /^[1-5]+$/;
+  const regInteger = /^\d+$/;
+
+  if (!regName.test(input.name)) {
+    error.name = 'Name is required';
+  } else if (!regNumberBetween.test(input.difficulty)) {
+    error.difficulty = 'Difficulty is required';
+  } else if (!input.duration) {
+    error.duration = 'Duration is required';
+  } else if (!regInteger.test(input.duration)) {
+    error.duration = 'Duration must be a number';
+  } else if (!input.season) {
+    error.season = 'Season is required';
+  } else if (input.inputCountries.length === 0) {
+    error.inputCountries = 'At least one country is required';
+  }
+  return error;
+}
+
 export default function ActivityCreation() {
   const dispatch = useDispatch();
 
@@ -22,7 +45,7 @@ export default function ActivityCreation() {
   }, []);
   //--
 
-  //--Handling Inputs
+  //--HANDLING INPUTS & ERRORS
   const [inputsForm, setinputsForm] = useState({
     name: '',
     difficulty: '',
@@ -30,6 +53,8 @@ export default function ActivityCreation() {
     season: '',
     inputCountries: [],
   });
+
+  const [error, setError] = useState({});
 
   function handleInputChange(inputs) {
     if (inputs.target.name === 'inputCountries') {
@@ -46,33 +71,47 @@ export default function ActivityCreation() {
         [inputs.target.name]: inputs.target.value,
       });
     }
+
+    setError(
+      validate({
+        ...inputsForm,
+        [inputs.target.name]: inputs.target.value,
+      })
+    );
   }
 
   const [text, setText] = useState('');
 
   function handleOnSubmit(e) {
     e.preventDefault();
-    dispatch(postActivity(inputsForm));
-    setText('');
-    setinputsForm({
-      name: '',
-      difficulty: '',
-      duration: '',
-      season: '',
-      inputCountries: [],
-    });
+    if (Object.keys(error).length === 0) {
+      dispatch(postActivity(inputsForm));
+      setText('');
+      setinputsForm({
+        name: '',
+        difficulty: '',
+        duration: '',
+        season: '',
+        inputCountries: [],
+      });
+    } else {
+      alert(
+        'You are trying to create an activity with empty spaces in your form'
+      );
+    }
   }
+  console.log(Object.keys(error).length === 0);
 
-  const result = useSelector((state) => state.activities);
-  console.log(result);
   //--
 
+  //RESTART BUTTON
   const restart = () => {
     setinputsForm({
       ...inputsForm,
       inputCountries: [],
     });
   };
+
   return (
     <div>
       <Link to="/countries">Home</Link>
@@ -86,16 +125,21 @@ export default function ActivityCreation() {
           onChange={handleInputChange}
           value={inputsForm.username}
         />
+        {error.name && <span>{error.name}</span>}
+        {error.inputCountries && <span>{error.inputCountries}</span>}
+
         <label htmlFor="forDifficulty">Difficulty: </label>
         <input
           type="number"
           name="difficulty"
           id="forDifficulty"
-          min="0"
+          min="1"
           max="5"
           onChange={handleInputChange}
           value={inputsForm.difficulty || 0}
         />
+        {error.difficulty && <span>{error.difficulty}</span>}
+
         <label htmlFor="forDuration">Duration (min): </label>
         <input
           type="text"
@@ -104,6 +148,8 @@ export default function ActivityCreation() {
           onChange={handleInputChange}
           value={inputsForm.duration}
         />
+        {error.duration && <span>{error.duration}</span>}
+
         <label htmlFor="forActivities">Season: </label>
         <select
           onChange={(e) => handleInputChange(e)}
@@ -115,8 +161,9 @@ export default function ActivityCreation() {
           <option value="winter">Winter</option>
           <option value="autumn">Autumn</option>
         </select>
-        <label htmlFor="forCountries">Países: </label>
+        {error.season && <span>{error.season}</span>}
 
+        <label htmlFor="forCountries">Países: </label>
         <select
           name="inputCountries"
           id="forCountries"
@@ -129,6 +176,7 @@ export default function ActivityCreation() {
           ))}
         </select>
         <p>{inputsForm.inputCountries}</p>
+        {error.inputCountries && <span>{error.inputCountries}</span>}
 
         <button type="reset" onClick={restart}>
           RESTART

@@ -92,3 +92,4 @@
 //cambié la posición de flag
 //estoy intentando renderizar cosas creadas en db
 //borrar
+//crear carpeta manejadora de errores
