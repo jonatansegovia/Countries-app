@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import PopUp from '../PopUp/PopUp';
 
 import { getCountries, filterByAlphabet, postActivity } from '../../actions';
 
@@ -30,8 +31,9 @@ function validate(input) {
 
 export default function ActivityCreation() {
   const dispatch = useDispatch();
+  const [buttonPopUp, setButtonPopUp] = useState(false);
 
-  //--Select Countries Ordered
+  //--SELECT COUNTRIES ORDERED
   const [forAlphabet, setForAlphabet] = useState(false);
   const countriesFounded = useSelector((state) => state.countries);
 
@@ -80,13 +82,10 @@ export default function ActivityCreation() {
     );
   }
 
-  const [text, setText] = useState('');
-
   function handleOnSubmit(e) {
     e.preventDefault();
     if (Object.keys(error).length === 0) {
       dispatch(postActivity(inputsForm));
-      setText('');
       setinputsForm({
         name: '',
         difficulty: '',
@@ -94,14 +93,15 @@ export default function ActivityCreation() {
         season: '',
         inputCountries: [],
       });
+      setButtonPopUp(true);
+      setTimeout(() => {}, 1000);
     } else {
       alert(
-        'You are trying to create an activity with empty spaces in your form'
+        'You are trying to create an activity without filling all the fields! '
       );
+      setButtonPopUp(false);
     }
   }
-  console.log(Object.keys(error).length === 0);
-
   //--
 
   //RESTART BUTTON
@@ -111,6 +111,7 @@ export default function ActivityCreation() {
       inputCountries: [],
     });
   };
+  //-
 
   return (
     <div>
@@ -177,7 +178,6 @@ export default function ActivityCreation() {
         </select>
         <p>{inputsForm.inputCountries}</p>
         {error.inputCountries && <span>{error.inputCountries}</span>}
-
         <button type="reset" onClick={restart}>
           RESTART
         </button>
@@ -185,6 +185,9 @@ export default function ActivityCreation() {
         <button type="submit" onClick={handleOnSubmit}>
           CREATE
         </button>
+        <PopUp trigger={buttonPopUp}>
+          <h3>Country Created Successfully!</h3>
+        </PopUp>
       </form>
     </div>
   );

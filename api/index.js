@@ -29,6 +29,6 @@ conn.sync({ force: false }).then(() => {
       .then(() => {
         console.log('Countries in DB Loaded');
       })
-      .catch((e) => console.log(e));
+      .catch((e) => console.error(e));
   });
 });

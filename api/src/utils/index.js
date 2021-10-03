@@ -26,7 +26,7 @@ const getFromApi = async () => {
 
     return dataFromApi;
   } catch (e) {
-    (e) => console.log(e);
+    (e) => console.error(e);
   }
 };
 

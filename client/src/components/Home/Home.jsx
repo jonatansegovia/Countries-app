@@ -21,8 +21,8 @@ export default function Home() {
   const dispatch = useDispatch();
   const countriesFounded = useSelector((state) => state.countries);
   const allActivities = useSelector((state) => state.activities);
-  console.log(allActivities);
-  //--Pagination
+
+  //--PAGINATION
   const [loading, setLoading] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [countriesPerPage, setCountriesPerPage] = useState(9);
@@ -47,7 +47,7 @@ export default function Home() {
   };
   //--
 
-  //--Handlers
+  //--HANDLERS
   const handleFilterByContinent = (e) => {
     dispatch(filterCountryByContinent(e.target.value));
   };
@@ -68,11 +68,12 @@ export default function Home() {
     dispatch(filterByActivity(act));
   };
 
-  //RESTART
+  //--RESTART
   const handleRestart = () => {
     dispatch(getCountries());
   };
   //--
+
   return (
     <div>
       <SearchBar />
@@ -111,7 +112,6 @@ export default function Home() {
           <option value="ascending">Smallest Countries to Biggest</option>
           <option value="descending">Biggest Countries to Smallest</option>
         </select>
-        {/* //ARREGLAR ESE DE ARRIBA, NO TRAE NADA */}
 
         <label htmlFor="forActivities">Search Activities: </label>
         <select

@@ -97,9 +97,7 @@ function rootReducer(state = initialState, action) {
       let filteredByAct = [];
       for (let j = 0; j < countriesToOrderByAct.length; j++) {
         if (countriesToOrderByAct[j].activities.length > 0) {
-          // console.log(countriesToOrderByAct[j]);
           for (let i = 0; i < countriesToOrderByAct[j].activities.length; i++) {
-            console.log(countriesToOrderByAct[j].activities[i]);
             if (
               countriesToOrderByAct[j].activities[i].name.toLowerCase() ===
               action.payload.toLowerCase()
