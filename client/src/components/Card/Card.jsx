@@ -14,9 +14,10 @@ export default function Card({ countries, loading, byParams }) {
             <li key={idx}>
               <Link to={`/countries/${c.id}`}>
                 <img
+                  className={s.img}
                   alt="flag from country"
-                  width="350px"
-                  heigth="200px"
+                  width="400px"
+                  heigth="300px"
                   src={c.flag}
                 ></img>
               </Link>

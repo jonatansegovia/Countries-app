@@ -15,8 +15,8 @@ export default function Pagination({
   }
 
   return (
-    <div>
-      <nav className={s['container-pages']}>
+    <div className={s['container-pages']}>
+      <nav>
         <ul>
           {pageNumbers.map((number) => {
             return (

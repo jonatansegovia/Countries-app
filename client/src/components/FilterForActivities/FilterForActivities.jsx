@@ -4,6 +4,8 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { getActivities, filterByActivity, getCountries } from '../../actions';
 
+import s from '../Home/Home.module.css';
+
 export default function FilterForActivities() {
   const dispatch = useDispatch();
   const allActivities = useSelector((state) => state.activities);
@@ -21,8 +23,8 @@ export default function FilterForActivities() {
   };
 
   return (
-    <div>
-      <label htmlFor="forActivities">Search Activities: </label>
+    <div className={s['aside-boxes']}>
+      <label htmlFor="forActivities">Activities: </label>
       <select
         name="activity"
         id="forActivities"
@@ -36,7 +38,9 @@ export default function FilterForActivities() {
             </option>
           ))}
       </select>
-      <button onClick={handleRestart}>RESTART</button>
+      <div>
+        <button onClick={handleRestart}>RESTART</button>
+      </div>
     </div>
   );
 }

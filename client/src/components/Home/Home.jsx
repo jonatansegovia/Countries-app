@@ -70,42 +70,57 @@ export default function Home() {
       <div className={s.navbar}>
         <SearchBar />
       </div>
+
       <aside className={s.aside}>
-        <label htmlFor="forAlphabet">Search by Alphabet: </label>
-        <select
-          id="forAlphabet"
-          onChange={(e) => handleFilterByAlphabet(e.target.value)}
-        >
-          <option disabled>---</option>
-          <option value="ascending">A-Z</option>
-          <option value="descending">Z-A</option>
-        </select>
-        <label htmlFor="forContinents">Search by Continent: </label>
-        <select id="forContinents" onChange={(e) => handleFilterByContinent(e)}>
-          <option disabled>---</option>
-          <option value="All">All Countries</option>
-          <option value="Europe">Europe</option>
-          <option value="Oceania">Oceania</option>
-          <option value="Americas">Americas</option>
-          <option value="Africa">Africa</option>
-          <option value="Asia">Asia</option>
-          <option value="Antarctic">Antarctic</option>
-        </select>
-        <label htmlFor="forArea">Search by Area in Millons {'\u33A2'}: </label>
-        <select id="forArea" onChange={(e) => handleFilterByArea(e)}>
-          <option disabled>---</option>
-          <option value="ascending">Smallest Countries to Biggest</option>
-          <option value="descending">Biggest Countries to Smallest</option>
-        </select>
+        <div className={s['aside-boxes']}>
+          <label htmlFor="forAlphabet">Alphabet: </label>
+          <select
+            id="forAlphabet"
+            onChange={(e) => handleFilterByAlphabet(e.target.value)}
+          >
+            <option disabled>---</option>
+            <option value="ascending">A-Z</option>
+            <option value="descending">Z-A</option>
+          </select>
+        </div>
+        <div className={s['aside-boxes']}>
+          <label htmlFor="forContinents">Continent: </label>
+          <select
+            id="forContinents"
+            onChange={(e) => handleFilterByContinent(e)}
+          >
+            <option disabled>---</option>
+            <option value="All">All Countries</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+            <option value="Americas">Americas</option>
+            <option value="Africa">Africa</option>
+            <option value="Asia">Asia</option>
+            <option value="Antarctic">Antarctic</option>
+          </select>
+        </div>
+        <div className={s['aside-boxes']}>
+          <label htmlFor="forArea">Area: </label>
+          <select id="forArea" onChange={(e) => handleFilterByArea(e)}>
+            <option disabled>---</option>
+            <option value="ascending">Smallest Countries to Biggest</option>
+            <option value="descending">Biggest Countries to Smallest</option>
+          </select>
+        </div>
+
         <FilterForActivities />
       </aside>
 
       <section className={s.section}>
-        {countriesFounded.length > 0 ? (
-          <Card countries={currentCountry} loading={loading} />
-        ) : (
-          <span>Ops! Country not found, try again!</span>
-        )}
+        <div>
+          {countriesFounded.length > 0 ? (
+            <Card countries={currentCountry} loading={loading} />
+          ) : (
+            <span className={s.message}>
+              Ops! Country not found, try again!
+            </span>
+          )}
+        </div>
       </section>
       <div className={s.footer}>
         <Pagination
