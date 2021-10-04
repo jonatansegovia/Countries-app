@@ -46,7 +46,6 @@ export const getActivities = () => {
   return async function (dispatch) {
     try {
       const json = await axios('http://localhost:3001/activity');
-      // console.log(json.data);
       return dispatch({
         type: 'GET_ACTIVITIES',
         payload: json.data,
@@ -96,7 +95,6 @@ export const postActivity = (body) => {
   return async function (dispatch) {
     try {
       const json = await axios.post('http://localhost:3001/activity', body);
-      // console.log('BODY: ', body);
       return json;
     } catch (err) {
       console.error('ERROR', err);

@@ -59,13 +59,15 @@ function rootReducer(state = initialState, action) {
             return 0;
           }
         }
+
+        return state.countries;
       });
       return {
         ...state,
         countries: orderedCountries,
       };
     case 'FILTER_BY_AREA':
-      const areasForSearch = state.countriesBackUp;
+      const areasForSearch = state.countries;
       const areaFound =
         action.payload === 'All'
           ? areasForSearch
@@ -87,6 +89,7 @@ function rootReducer(state = initialState, action) {
                   return 0;
                 }
               }
+              return areasForSearch;
             });
       return {
         ...state,

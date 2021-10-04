@@ -1,11 +1,11 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { getSearch } from '../../actions';
 
-import './searchBar.css';
+import s from './SearchBar.module.css';
 
 export default function SearchBar() {
   const dispatch = useDispatch();
@@ -20,9 +20,11 @@ export default function SearchBar() {
     dispatch(getSearch(text));
     setText('');
   }
-
   return (
-    <form className="searchBar_container" onSubmit={(e) => handleOnSubmit(e)}>
+    <form
+      className={s['searchBar_container']}
+      onSubmit={(e) => handleOnSubmit(e)}
+    >
       <label htmlFor="title">Search a Country</label>
       <input
         onChange={(e) => handleOnChange(e.target.value)}

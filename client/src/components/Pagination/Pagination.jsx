@@ -1,7 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import './Pagination.css';
+import s from './Pagination.module.css';
 
 export default function Pagination({
   countriesPerPage,
@@ -15,7 +15,7 @@ export default function Pagination({
   }
 
   return (
-    <nav className="container-pages">
+    <nav className={s['container-pages']}>
       <ul>
         {pageNumbers.map((number) => {
           return (

@@ -8,19 +8,18 @@ import {
   filterByArea,
   filterByAlphabet,
   filterCountryByContinent,
-  filterByActivity,
 } from '../../actions';
 
 import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
 import SearchBar from '../SearchBar/SearchBar';
+import FilterForActivities from '../FilterForActivities/FilterForActivities';
 
-import './home.css';
+import s from './Home.module.css';
 
 export default function Home() {
   const dispatch = useDispatch();
   const countriesFounded = useSelector((state) => state.countries);
-  const allActivities = useSelector((state) => state.activities);
 
   //--PAGINATION
   const [loading, setLoading] = useState(false);
@@ -33,6 +32,7 @@ export default function Home() {
     dispatch(getActivities());
     setLoading(false);
     setCountriesPerPage(9);
+    /* eslint-disable */
   }, []);
 
   const indexOfLastCountry = currentPage * countriesPerPage;
@@ -48,6 +48,7 @@ export default function Home() {
   //--
 
   //--HANDLERS
+
   const handleFilterByContinent = (e) => {
     dispatch(filterCountryByContinent(e.target.value));
   };
@@ -64,16 +65,6 @@ export default function Home() {
     setArea(e.target.value);
   };
 
-  const handleFilterByActivity = (act) => {
-    dispatch(filterByActivity(act));
-  };
-
-  //--RESTART
-  const handleRestart = () => {
-    dispatch(getCountries());
-  };
-  //--
-
   return (
     <div>
       <SearchBar />
@@ -83,18 +74,13 @@ export default function Home() {
           id="forAlphabet"
           onChange={(e) => handleFilterByAlphabet(e.target.value)}
         >
-          <option disabled selected value>
-            ---
-          </option>
+          <option disabled>---</option>
           <option value="ascending">A-Z</option>
           <option value="descending">Z-A</option>
         </select>
-
         <label htmlFor="forContinents">Search by Continent: </label>
         <select id="forContinents" onChange={(e) => handleFilterByContinent(e)}>
-          <option disabled selected value>
-            ---
-          </option>
+          <option disabled>---</option>
           <option value="All">All Countries</option>
           <option value="Europe">Europe</option>
           <option value="Oceania">Oceania</option>
@@ -103,34 +89,13 @@ export default function Home() {
           <option value="Asia">Asia</option>
           <option value="Antarctic">Antarctic</option>
         </select>
-
         <label htmlFor="forArea">Search by Area in Millons {'\u33A2'}: </label>
         <select id="forArea" onChange={(e) => handleFilterByArea(e)}>
-          <option disabled selected value>
-            ---
-          </option>
+          <option disabled>---</option>
           <option value="ascending">Smallest Countries to Biggest</option>
           <option value="descending">Biggest Countries to Smallest</option>
         </select>
-
-        <label htmlFor="forActivities">Search Activities: </label>
-        <select
-          name="activity"
-          id="forActivities"
-          onChange={(e) => handleFilterByActivity(e.target.value)}
-        >
-          <option disabled selected value>
-            ---
-          </option>
-          {/* renderizado de actividades */}
-          {allActivities.length > 0 &&
-            allActivities.map((a) => (
-              <option key={a.id} value={a.name}>
-                {a.name}
-              </option>
-            ))}
-        </select>
-        <button onClick={handleRestart}>RESTART</button>
+        <FilterForActivities />
         <div>
           <Pagination
             countriesPerPage={countriesPerPage}

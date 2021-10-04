@@ -80,7 +80,7 @@
 //modularizar
 //transformar a dispatch y useSelector
 //carpetas para todo
-//borrar console.log
+//* borrar console.log
 //poner la barra de input solo en /home
 //manejar errores (en api y client)
 //return res.send y poner status, también mensajes de error y carga de datos
@@ -93,3 +93,4 @@
 //estoy intentando renderizar cosas creadas en db
 //borrar
 //crear carpeta manejadora de errores
+//manejar status

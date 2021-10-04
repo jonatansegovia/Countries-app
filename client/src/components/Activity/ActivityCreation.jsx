@@ -1,10 +1,11 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import PopUp from '../PopUp/PopUp';
 
 import { getCountries, filterByAlphabet, postActivity } from '../../actions';
+
+import PopUp from '../PopUp/PopUp';
 
 function validate(input) {
   let error = {};
@@ -44,6 +45,8 @@ export default function ActivityCreation() {
 
   useEffect(() => {
     dispatch(getCountries());
+    setError(validate(inputsForm));
+    /* eslint-disable */
   }, []);
   //--
 
@@ -58,7 +61,7 @@ export default function ActivityCreation() {
 
   const [error, setError] = useState({});
 
-  function handleInputChange(inputs) {
+  const handleInputChange = (inputs) => {
     if (inputs.target.name === 'inputCountries') {
       setinputsForm({
         ...inputsForm,
@@ -80,7 +83,7 @@ export default function ActivityCreation() {
         [inputs.target.name]: inputs.target.value,
       })
     );
-  }
+  };
 
   function handleOnSubmit(e) {
     e.preventDefault();

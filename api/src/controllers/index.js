@@ -35,23 +35,15 @@ const getCountryByParams = async (req, res, next) => {
   const countryIdToUp = req.params.idPais.toUpperCase();
 
   try {
-    var countryFound = await Country.findOne({
+    const countryFound = await Country.findOne({
       where: {
         id: countryIdToUp,
       },
-      // include: {
-      //   model: Country,
-      //   attributes: [
-      //     'name',
-      //     'id',
-      //     'flag',
-      //     'continent',
-      //     'capital',
-      //     'subregion',
-      //     'area',
-      //   ],
-      //   through: { attributes: [] },
-      // },
+      include: {
+        model: Activities,
+        attributes: ['name', 'difficulty', 'duration', 'season'],
+        through: { attributes: [] },
+      },
     });
 
     Object.values(countryFound) && res.send(countryFound);
@@ -89,7 +81,6 @@ const postActivity = async (req, res, next) => {
 const getActivity = async (req, res, next) => {
   try {
     const activities = await Activities.findAll();
-    console.log(activities);
     res.status(200).send(activities);
   } catch (e) {
     return res.status(400).send(e);
