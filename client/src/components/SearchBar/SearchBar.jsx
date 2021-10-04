@@ -21,22 +21,29 @@ export default function SearchBar() {
     setText('');
   }
   return (
-    <form
-      className={s['searchBar_container']}
-      onSubmit={(e) => handleOnSubmit(e)}
-    >
-      <label htmlFor="title">Search a Country</label>
-      <input
-        onChange={(e) => handleOnChange(e.target.value)}
-        type="text"
-        id="title"
-        placeholder="type here..."
-        value={text}
-      />
-      <button type="submit" path="/activity">
-        Search
-      </button>
-      <Link to="/activity">Create Activiy</Link>
+    <form className={s.main} onSubmit={(e) => handleOnSubmit(e)}>
+      <div className={s.left}>
+        <i class="fas fa-globe-americas fa-2x"></i>
+        <label htmlFor="title">Countries App</label>
+      </div>
+      <div className={s.center}>
+        <div className={s['center-input-btn']}>
+          <input
+            className={s.input}
+            onChange={(e) => handleOnChange(e.target.value)}
+            type="text"
+            id="title"
+            placeholder="Search a country by name..."
+            value={text}
+          />
+          <button className={s.btn} type="submit" path="/activity">
+            Search
+          </button>
+        </div>
+      </div>
+      <div className={s.right}>
+        <Link to="/activity">Create Activiy</Link>
+      </div>
     </form>
   );
 }

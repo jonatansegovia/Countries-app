@@ -15,18 +15,20 @@ export default function Pagination({
   }
 
   return (
-    <nav className={s['container-pages']}>
-      <ul>
-        {pageNumbers.map((number) => {
-          return (
-            <li key={number}>
-              <Link to="#" onClick={() => paginate(number)}>
-                {number}
-              </Link>
-            </li>
-          );
-        })}
-      </ul>
-    </nav>
+    <div>
+      <nav className={s['container-pages']}>
+        <ul>
+          {pageNumbers.map((number) => {
+            return (
+              <li key={number}>
+                <Link to="#" onClick={() => paginate(number)}>
+                  {number}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      </nav>
+    </div>
   );
 }

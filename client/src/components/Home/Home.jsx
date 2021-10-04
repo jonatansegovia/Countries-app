@@ -10,9 +10,9 @@ import {
   filterCountryByContinent,
 } from '../../actions';
 
+import SearchBar from '../SearchBar/SearchBar';
 import Card from '../Card/Card';
 import Pagination from '../Pagination/Pagination';
-import SearchBar from '../SearchBar/SearchBar';
 import FilterForActivities from '../FilterForActivities/FilterForActivities';
 
 import s from './Home.module.css';
@@ -66,9 +66,11 @@ export default function Home() {
   };
 
   return (
-    <div>
-      <SearchBar />
-      <div>
+    <div className={s.main}>
+      <div className={s.navbar}>
+        <SearchBar />
+      </div>
+      <aside className={s.aside}>
         <label htmlFor="forAlphabet">Search by Alphabet: </label>
         <select
           id="forAlphabet"
@@ -96,20 +98,21 @@ export default function Home() {
           <option value="descending">Biggest Countries to Smallest</option>
         </select>
         <FilterForActivities />
-        <div>
-          <Pagination
-            countriesPerPage={countriesPerPage}
-            totalCountries={countriesFounded.length}
-            paginate={paginate}
-          />
-        </div>
-        <div>
-          {countriesFounded.length > 0 ? (
-            <Card countries={currentCountry} loading={loading} />
-          ) : (
-            <span>Ops! Country not found, try again!</span>
-          )}
-        </div>
+      </aside>
+
+      <section className={s.section}>
+        {countriesFounded.length > 0 ? (
+          <Card countries={currentCountry} loading={loading} />
+        ) : (
+          <span>Ops! Country not found, try again!</span>
+        )}
+      </section>
+      <div className={s.footer}>
+        <Pagination
+          countriesPerPage={countriesPerPage}
+          totalCountries={countriesFounded.length}
+          paginate={paginate}
+        />
       </div>
     </div>
   );

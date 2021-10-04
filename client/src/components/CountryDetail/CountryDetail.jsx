@@ -23,7 +23,6 @@ export default function CountryDetail() {
     /* eslint-disable */
   }, [setLoading]);
 
-  console.log('COUNTRY DETAIL: ', countryFound);
   return (
     <div>
       <Link to="/countries">HOME</Link>
