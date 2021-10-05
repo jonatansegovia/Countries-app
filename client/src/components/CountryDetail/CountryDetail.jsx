@@ -5,7 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { getCountryByParams } from '../../actions';
-import CardById from '../CardById/CardById';
+import CardsById from '../CardsById/CardsById';
+
+import s from './CountryDetail.module.css';
 
 export default function CountryDetail() {
   const { idPais } = useParams();
@@ -22,18 +24,19 @@ export default function CountryDetail() {
   }, [setLoading]);
 
   return (
-    <div>
-      <div>
+    <div className={s['container-CountryDetail']}>
+      <div className={s['container-CountryDetail__link']}>
         <Link to="/countries">HOME</Link>
       </div>
-      <div>
-        <CardById
+      <div className={s['container-CountryDetail__flag']}>
+        <CardsById
           countries={[countryFound]}
           loading={loading}
           byParams={idPais}
         />
       </div>
-      <div></div>
+      <div className={s['container-CountryDetail__center']}>CENTER</div>
+      <div className={s['container-CountryDetail__right']}>DERECHA</div>
     </div>
   );
 }
