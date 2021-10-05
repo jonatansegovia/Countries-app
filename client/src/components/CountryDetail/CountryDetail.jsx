@@ -26,17 +26,15 @@ export default function CountryDetail() {
   return (
     <div className={s['container-CountryDetail']}>
       <div className={s['container-CountryDetail__link']}>
-        <Link to="/countries">HOME</Link>
+        <Link className={s.link} to="/countries">
+          HOME
+        </Link>
       </div>
-      <div className={s['container-CountryDetail__flag']}>
-        <CardsById
-          countries={[countryFound]}
-          loading={loading}
-          byParams={idPais}
-        />
-      </div>
-      <div className={s['container-CountryDetail__center']}>CENTER</div>
-      <div className={s['container-CountryDetail__right']}>DERECHA</div>
+      <CardsById
+        countries={[countryFound]}
+        loading={loading}
+        byParams={idPais}
+      />
     </div>
   );
 }
