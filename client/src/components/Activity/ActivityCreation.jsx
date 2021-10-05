@@ -7,10 +7,12 @@ import { getCountries, filterByAlphabet, postActivity } from '../../actions';
 
 import PopUp from '../PopUp/PopUp';
 
+import s from './ActivityCreation.module.css';
+
 function validate(input) {
   let error = {};
 
-  var regName = /^[a-zA-Z]+$/;
+  var regName = /^[A-Za-z0-9 _]*[A-Za-z0-9][A-Za-z0-9 _]*$/;
   var regNumberBetween = /^[1-5]+$/;
   const regInteger = /^\d+$/;
 
@@ -42,12 +44,6 @@ export default function ActivityCreation() {
     dispatch(filterByAlphabet('ascending'));
     setForAlphabet(true);
   }
-
-  useEffect(() => {
-    dispatch(getCountries());
-    setError(validate(inputsForm));
-    /* eslint-disable */
-  }, []);
   //--
 
   //--HANDLING INPUTS & ERRORS
@@ -105,22 +101,35 @@ export default function ActivityCreation() {
       setButtonPopUp(false);
     }
   }
+
+  useEffect(() => {
+    dispatch(getCountries());
+    setError(validate(inputsForm));
+    /* eslint-disable */
+  }, []);
   //--
 
   //RESTART BUTTON
   const restart = () => {
+    dispatch(filterByAlphabet('ascending'));
+    setForAlphabet(true);
     setinputsForm({
-      ...inputsForm,
+      name: '',
+      difficulty: '',
+      duration: '',
+      season: '',
       inputCountries: [],
     });
   };
   //-
 
   return (
-    <div>
-      <Link to="/countries">Home</Link>
-      <form onSubmit={(e) => handleOnSubmit(e)}>
-        <h2>Create a new activity</h2>
+    <div className={s.container}>
+      <form
+        className={s['container__form']}
+        onSubmit={(e) => handleOnSubmit(e)}
+      >
+        <h2>Create Here :</h2>
         <label htmlFor="forName">Name: </label>
         <input
           type="text"
@@ -130,7 +139,6 @@ export default function ActivityCreation() {
           value={inputsForm.username}
         />
         {error.name && <span>{error.name}</span>}
-        {error.inputCountries && <span>{error.inputCountries}</span>}
 
         <label htmlFor="forDifficulty">Difficulty: </label>
         <input
@@ -140,7 +148,7 @@ export default function ActivityCreation() {
           min="1"
           max="5"
           onChange={handleInputChange}
-          value={inputsForm.difficulty || 0}
+          value={inputsForm.difficulty}
         />
         {error.difficulty && <span>{error.difficulty}</span>}
 
@@ -169,6 +177,7 @@ export default function ActivityCreation() {
 
         <label htmlFor="forCountries">Países: </label>
         <select
+          className={s['select-countries']}
           name="inputCountries"
           id="forCountries"
           onChange={(e) => handleInputChange(e)}
@@ -179,19 +188,50 @@ export default function ActivityCreation() {
             </option>
           ))}
         </select>
-        <p>{inputsForm.inputCountries}</p>
         {error.inputCountries && <span>{error.inputCountries}</span>}
-        <button type="reset" onClick={restart}>
+
+        <button
+          className={s['create-btn']}
+          type="submit"
+          onClick={handleOnSubmit}
+        >
+          CREATE
+        </button>
+
+        <button
+          className={s['create-btn-restart']}
+          type="reset"
+          onClick={restart}
+        >
           RESTART
         </button>
 
-        <button type="submit" onClick={handleOnSubmit}>
-          CREATE
-        </button>
         <PopUp trigger={buttonPopUp}>
-          <h3>Country Created Successfully!</h3>
+          <h3>Activity Created Successfully!</h3>
         </PopUp>
       </form>
+      <div className={s['container-link']}>
+        <div className={s.left}>
+          <i class="fas fa-globe-americas fa-2x"></i>
+          <label htmlFor="title">Countries App</label>
+        </div>
+        <Link className={s.link} to="/countries">
+          Home
+        </Link>
+      </div>
+
+      <div className={s['container__section']}>
+        <section className={s.section}>
+          <div>Name: {inputsForm.name}</div>
+          <div>Difficulty: {inputsForm.difficulty}</div>
+          <div>Duration: {inputsForm.duration}</div>
+          <div>Season: {inputsForm.season}</div>
+          <div className={s['container__section-countries']}>
+            Countries:
+            <p>{inputsForm.inputCountries.join(' - ')}</p>
+          </div>
+        </section>
+      </div>
     </div>
   );
 }

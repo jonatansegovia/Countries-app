@@ -4,22 +4,36 @@
   left: 0;
   width: 100%;
   height: 100vh;
-  background-color: rgba(0, 0, 0, 0.2);
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
 .popup-inner {
+  font-size: 2rem;
   position: relative;
   padding: 32px;
   width: 100%;
   max-width: 640px;
-  background-color: #fff;
+  background-color: rgba(0, 0, 0, 0.2);
 }
 
-.popup-inner .close-btn {
-  position: absolute;
-  top: 16px;
-  right: 16px;
+.popup-inner a {
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  color: aliceblue;
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
+.popup-inner a:hover {
+  background-color: rgb(255, 0, 149);
+  color: aliceblue;
+  transition-timing-function: ease-in;
+  transition: 0.3s;
+}
+
+.popup-inner h3 {
+  margin-bottom: 1rem;
 }

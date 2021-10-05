@@ -11,7 +11,7 @@ import {
 } from '../../actions';
 
 import SearchBar from '../SearchBar/SearchBar';
-import Card from '../Card/Card';
+import Cards from '../Cards/Cards';
 import Pagination from '../Pagination/Pagination';
 import FilterForActivities from '../FilterForActivities/FilterForActivities';
 
@@ -78,7 +78,9 @@ export default function Home() {
             id="forAlphabet"
             onChange={(e) => handleFilterByAlphabet(e.target.value)}
           >
-            <option disabled>---</option>
+            <option selected={true} disabled="disabled">
+              ---
+            </option>
             <option value="ascending">A-Z</option>
             <option value="descending">Z-A</option>
           </select>
@@ -89,7 +91,9 @@ export default function Home() {
             id="forContinents"
             onChange={(e) => handleFilterByContinent(e)}
           >
-            <option disabled>---</option>
+            <option selected={true} disabled="disabled">
+              ---
+            </option>
             <option value="All">All Countries</option>
             <option value="Europe">Europe</option>
             <option value="Oceania">Oceania</option>
@@ -102,7 +106,9 @@ export default function Home() {
         <div className={s['aside-boxes']}>
           <label htmlFor="forArea">Area: </label>
           <select id="forArea" onChange={(e) => handleFilterByArea(e)}>
-            <option disabled>---</option>
+            <option selected={true} disabled="disabled">
+              ---
+            </option>
             <option value="ascending">Smallest Countries to Biggest</option>
             <option value="descending">Biggest Countries to Smallest</option>
           </select>
@@ -112,15 +118,11 @@ export default function Home() {
       </aside>
 
       <section className={s.section}>
-        <div>
-          {countriesFounded.length > 0 ? (
-            <Card countries={currentCountry} loading={loading} />
-          ) : (
-            <span className={s.message}>
-              Ops! Country not found, try again!
-            </span>
-          )}
-        </div>
+        {countriesFounded.length > 0 ? (
+          <Cards countries={currentCountry} loading={loading} />
+        ) : (
+          <span className={s.message}>Ops! Country not found, try again!</span>
+        )}
       </section>
       <div className={s.footer}>
         <Pagination

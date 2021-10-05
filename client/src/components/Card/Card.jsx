@@ -3,30 +3,21 @@ import { Link } from 'react-router-dom';
 
 import s from './Card.module.css';
 
-export default function Card({ countries, loading, byParams }) {
-  loading && <h2>Loading...</h2>;
-
+export default function Card({ key, img, id, name, continent }) {
   return (
-    <div>
-      <ul className={s.container}>
-        {countries.length > 0 &&
-          countries.map((c, idx) => (
-            <li key={idx}>
-              <Link to={`/countries/${c.id}`}>
-                <img
-                  className={s.img}
-                  alt="flag from country"
-                  width="400px"
-                  heigth="300px"
-                  src={c.flag}
-                ></img>
-              </Link>
-              <h2>{c.id}</h2>
-              <h2>{c.name}</h2>
-              <h2>{c.continent}</h2>
-            </li>
-          ))}
-      </ul>
+    <div className={s['container-cards']}>
+      <li key={key}>
+        <Link to={`/countries/${id}`}>
+          <img
+            className={s['container-cards__img']}
+            alt="flag from country"
+            src={img}
+          ></img>
+        </Link>
+        <h2>{id}</h2>
+        <h2>{name}</h2>
+        <h2>{continent}</h2>
+      </li>
     </div>
   );
 }

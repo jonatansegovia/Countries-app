@@ -30,7 +30,9 @@ export default function FilterForActivities() {
         id="forActivities"
         onChange={(e) => handleFilterByActivity(e.target.value)}
       >
-        <option disabled>---</option>
+        <option selected={true} disabled="disabled">
+          ---
+        </option>
         {allActivities.length > 0 &&
           allActivities.map((a) => (
             <option key={a.id} value={a.name}>
