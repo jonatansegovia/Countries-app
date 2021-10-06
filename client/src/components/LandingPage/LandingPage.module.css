@@ -1,0 +1,33 @@
+.container {
+  background: url('../../img/world.png') no-repeat center/cover;
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.container__title {
+  font-size: 4rem;
+  font-style: italic;
+  background-color: rgb(255, 0, 149);
+  border-radius: 15px;
+  padding: 16px;
+  color: aliceblue;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.09), 0 4px 2px rgba(0, 0, 0, 0.09),
+    0 8px 4px rgba(0, 0, 0, 0.09), 0 16px 8px rgba(0, 0, 0, 0.09),
+    0 32px 16px rgba(0, 0, 0, 0.09);
+}
+
+.container__button {
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 8px 18px;
+  border-radius: 4px;
+}
+
+.container__p {
+  color: aliceblue;
+}

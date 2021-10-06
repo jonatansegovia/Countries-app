@@ -1,0 +1,22 @@
+.container-CountryDetail__link {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-top: 1rem;
+  margin-right: 1rem;
+}
+
+.link {
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  color: aliceblue;
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+  font-size: 1.5rem;
+}
+
+.link:hover {
+  background-color: rgb(255, 0, 149);
+  color: aliceblue;
+  transition-timing-function: ease-in;
+  transition: 0.3s;
+}

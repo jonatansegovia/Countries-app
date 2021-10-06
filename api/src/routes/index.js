@@ -5,11 +5,12 @@ const { Router } = require('express');
 const router = Router();
 
 const {
-  getActivity,
   getAllCountries,
   getCountryByParams,
-  postActivity,
-} = require('../controllers');
+} = require('../controllers/Country');
+
+const { getActivity, postActivity } = require('../controllers/Activity');
+
 // Configurar los routers
 // Ejemplo: router.use('/auth', authRouter);
 

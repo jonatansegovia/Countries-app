@@ -1,0 +1,46 @@
+.container {
+  width: 100%;
+  height: 100vh;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  gap: 4rem;
+}
+
+.container-innerId {
+  display: flex;
+  flex-direction: column;
+  gap: 4rem;
+}
+
+.container-innerActivity {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(3, 1fr);
+  border: 1px solid black;
+  padding: 2rem;
+}
+
+.btn-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+}
+
+.btn-create {
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  color: aliceblue;
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.btn-create:hover {
+  background-color: rgb(255, 0, 149);
+  color: aliceblue;
+  transition-timing-function: ease-in;
+  transition: 0.3s;
+}

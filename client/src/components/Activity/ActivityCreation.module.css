@@ -1,0 +1,128 @@
+.container {
+  display: grid;
+  grid-template-areas: 'aside section';
+  grid-template-rows: 50px 1fr 50px;
+  grid-template-columns: 300px 1fr;
+}
+
+.container__form {
+  padding-top: 12rem;
+  height: 100vh;
+  grid-area: aside;
+  text-align: center;
+  color: aliceblue;
+  background: rgba(0, 0, 0, 0.842);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.container__form label {
+  font-size: 1.1rem;
+}
+
+.container__form input {
+  height: 20px;
+  border-radius: 4px;
+  border: none;
+  padding: 10px;
+}
+
+.container__form select {
+  width: 8rem;
+  height: 20px;
+  border-radius: 4px;
+  border: none;
+  padding: 10px;
+}
+
+.create-btn-restart {
+  color: aliceblue;
+  background: none;
+  border: 2px solid whitesmoke;
+}
+
+.container__form button {
+  margin-top: 3rem;
+  font-weight: bold;
+  height: 32px;
+  width: 5rem;
+  border-radius: 4px;
+}
+
+.container__form span {
+  color: red;
+}
+
+.container__section {
+  height: 100vh;
+  grid-area: section;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.section {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 3rem;
+  width: 40rem;
+  height: 40rem;
+  background-color: rgb(251, 251, 251);
+  border-radius: 4px;
+  box-shadow: 0 2px 1px rgba(0, 0, 0, 0.09), 0 4px 2px rgba(0, 0, 0, 0.09),
+    0 8px 4px rgba(0, 0, 0, 0.09), 0 16px 8px rgba(0, 0, 0, 0.09),
+    0 32px 16px rgba(0, 0, 0, 0.09);
+}
+
+.section div {
+  width: 100%;
+  font-size: 1.5rem;
+  border-bottom: 1px solid rgb(209, 209, 209);
+}
+
+.section div p {
+  word-wrap: break-word;
+  font-size: 1rem;
+}
+
+.container-link {
+  width: 100vw;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  z-index: 10;
+}
+
+.link {
+  padding: 0.3rem 1rem 0.3rem 1rem;
+  color: aliceblue;
+  border: 1px solid aliceblue;
+  border-radius: 5px;
+  margin-right: 3rem;
+  text-align: center;
+  font-size: 1.5rem;
+}
+
+.link:hover {
+  background-color: rgb(255, 0, 149);
+  color: aliceblue;
+  transition-timing-function: ease-in;
+  transition: 0.3s;
+}
+
+.left {
+  display: flex;
+  grid-area: navbar1;
+  margin-left: 4.7rem;
+  justify-content: flex-start;
+  align-items: center;
+  color: rgb(243, 233, 233);
+  gap: 0.5rem;
+}
