@@ -1,3 +1,14 @@
+import {
+  GET_COUNTRIES,
+  GET_COUNTRIES_BY_ID,
+  GET_SEARCH_ONE,
+  GET_ACTIVITIES,
+  FILTER_CONTINENT,
+  FILTER_BY_ALPHABET,
+  FILTER_BY_AREA,
+  FILTER_BY_ACTIVITY,
+} from '../actions';
+
 const initialState = {
   countries: [],
   country: [],
@@ -7,29 +18,29 @@ const initialState = {
 
 function rootReducer(state = initialState, action) {
   switch (action.type) {
-    case 'GET_COUNTRIES':
+    case GET_COUNTRIES:
       return {
         ...state,
         countries: action.payload,
         countriesBackUp: action.payload,
       };
 
-    case 'GET_COUNTRIES_BY_ID':
+    case GET_COUNTRIES_BY_ID:
       return {
         ...state,
         country: action.payload,
       };
-    case 'GET_SEARCH_ONE':
+    case GET_SEARCH_ONE:
       return {
         ...state,
         countries: action.payload,
       };
-    case 'GET_ACTIVITIES':
+    case GET_ACTIVITIES:
       return {
         ...state,
         activities: action.payload,
       };
-    case 'FILTER_CONTINENT':
+    case FILTER_CONTINENT:
       const allCountries = state.countriesBackUp;
       const continentFound =
         action.payload === 'All'
@@ -39,7 +50,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: continentFound,
       };
-    case 'FILTER_BY_ALPHABET':
+    case FILTER_BY_ALPHABET:
       const countriesToOrder = state.countries;
       const orderedCountries = countriesToOrder.sort(function (a, b) {
         if (action.payload === 'ascending') {
@@ -66,7 +77,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: orderedCountries,
       };
-    case 'FILTER_BY_AREA':
+    case FILTER_BY_AREA:
       const areasForSearch = state.countries;
       const areaFound =
         action.payload === 'All'
@@ -95,7 +106,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: areaFound,
       };
-    case 'FILTER_BY_ACTIVITY':
+    case FILTER_BY_ACTIVITY:
       let countriesToOrderByAct = state.countriesBackUp;
       let filteredByAct = [];
       for (let j = 0; j < countriesToOrderByAct.length; j++) {
@@ -114,8 +125,7 @@ function rootReducer(state = initialState, action) {
         ...state,
         countries: filteredByAct,
       };
-    case 'POST_ACTIVITY':
-      return state;
+
     default:
       return state;
   }
