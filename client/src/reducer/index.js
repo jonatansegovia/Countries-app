@@ -70,8 +70,6 @@ function rootReducer(state = initialState, action) {
             return 0;
           }
         }
-
-        return state.countries;
       });
       return {
         ...state,

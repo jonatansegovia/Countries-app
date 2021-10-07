@@ -55,9 +55,11 @@ button:hover {
   color: aliceblue;
   transition-timing-function: ease-in;
   transition: 0.3s;
+  cursor: pointer;
 }
 
 .section {
+  text-align: center;
   grid-area: section;
   padding: 20px;
 }

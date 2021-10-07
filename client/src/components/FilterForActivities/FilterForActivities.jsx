@@ -23,14 +23,12 @@ export default function FilterForActivities() {
     <div className={s['aside-boxes']}>
       <label htmlFor="forActivities">Activities: </label>
       <select
+        defaultValue={''}
         name="activity"
         id="forActivities"
         onChange={(e) => handleFilterByActivity(e.target.value)}
       >
-        <option selected={true} disabled="disabled">
-          ---
-        </option>
-
+        <option disabled="disabled"></option>
         {allActivities.length > 0 &&
           allActivities.map((a) => (
             <option key={a.id} value={a.name}>

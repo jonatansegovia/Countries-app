@@ -13,6 +13,7 @@ export default function Cards({ countries, loading }) {
         {countries.length > 0 &&
           countries.map((c, idx) => (
             <Card
+              key={idx}
               idx={idx}
               img={c.flag}
               id={c.id}

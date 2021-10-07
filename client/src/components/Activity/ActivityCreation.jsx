@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
-import { filterByAlphabet, postActivity } from '../../actions';
+import { filterByAlphabet, getCountries, postActivity } from '../../actions';
 
 import { validate } from '../Utils';
 import ActivityForm from '../ActivityForm/ActivityForm';
@@ -16,14 +16,17 @@ export default function ActivityCreation() {
   const [buttonPopUp, setButtonPopUp] = useState(false);
 
   //--SELECT COUNTRIES ORDERED
-  const [forAlphabet, setForAlphabet] = useState(false);
   const countriesFounded = useSelector((state) => state.countries);
 
-  if (countriesFounded.length > 0 && forAlphabet === false) {
+  if (countriesFounded.length > 0) {
     dispatch(filterByAlphabet('ascending'));
-    setForAlphabet(true);
   }
   //--
+
+  useEffect(() => {
+    dispatch(getCountries());
+    /* eslint-disable */
+  }, []);
 
   //--HANDLING INPUTS & ERRORS
   const [inputsForm, setinputsForm] = useState({
@@ -80,18 +83,11 @@ export default function ActivityCreation() {
     }
   }
 
-  useEffect(() => {
-    dispatch(filterByAlphabet('ascending'));
-    setForAlphabet(true);
-    setError(validate(inputsForm));
-    /* eslint-disable */
-  }, []);
   //--
 
   //RESTART BUTTON
   const restart = () => {
     dispatch(filterByAlphabet('ascending'));
-    setForAlphabet(true);
     setinputsForm({
       name: '',
       difficulty: '',
