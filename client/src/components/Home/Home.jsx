@@ -69,6 +69,7 @@ export default function Home() {
   //--RESTART
   const handleRestart = () => {
     dispatch(getCountries());
+    setCurrentPage(1);
     document.getElementById('forContinents').selectedIndex = 0;
     document.getElementById('forActivities').selectedIndex = 0;
     document.getElementById('forArea').selectedIndex = 0;

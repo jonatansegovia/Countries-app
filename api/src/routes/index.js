@@ -15,7 +15,6 @@ const { getActivity, postActivity } = require('../controllers/Activity');
 // Ejemplo: router.use('/auth', authRouter);
 
 router.get('/countries', getAllCountries);
-
 router.get('/countries/:idPais', getCountryByParams);
 
 router.post('/activity', postActivity);
