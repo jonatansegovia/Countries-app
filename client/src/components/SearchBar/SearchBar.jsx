@@ -23,7 +23,7 @@ export default function SearchBar() {
   return (
     <form className={s.main} onSubmit={(e) => handleOnSubmit(e)}>
       <div className={s.left}>
-        <i class="fas fa-globe-americas fa-2x"></i>
+        <i className="fas fa-globe-americas fa-2x"></i>
         <label htmlFor="title">Countries App</label>
       </div>
       <div className={s.center}>

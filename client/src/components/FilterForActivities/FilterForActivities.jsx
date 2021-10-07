@@ -2,7 +2,7 @@ import React from 'react';
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { getActivities, filterByActivity, getCountries } from '../../actions';
+import { getActivities, filterByActivity } from '../../actions';
 
 import s from '../Home/Home.module.css';
 
@@ -12,14 +12,11 @@ export default function FilterForActivities() {
 
   useEffect(() => {
     dispatch(getActivities());
+    /* eslint-disable */
   }, []);
 
   const handleFilterByActivity = (act) => {
     dispatch(filterByActivity(act));
-  };
-
-  const handleRestart = () => {
-    dispatch(getCountries());
   };
 
   return (
@@ -33,6 +30,7 @@ export default function FilterForActivities() {
         <option selected={true} disabled="disabled">
           ---
         </option>
+
         {allActivities.length > 0 &&
           allActivities.map((a) => (
             <option key={a.id} value={a.name}>
@@ -40,9 +38,6 @@ export default function FilterForActivities() {
             </option>
           ))}
       </select>
-      <div>
-        <button onClick={handleRestart}>RESTART</button>
-      </div>
     </div>
   );
 }

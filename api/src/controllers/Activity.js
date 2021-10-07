@@ -28,7 +28,7 @@ const postActivity = async (req, res, next) => {
 const getActivity = async (req, res, next) => {
   try {
     const activities = await Activities.findAll();
-    res.status(200).send(activities);
+    return res.status(200).send(activities);
   } catch (e) {
     return res.status(400).send(e);
   }

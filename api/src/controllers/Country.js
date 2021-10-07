@@ -50,7 +50,7 @@ const getCountryByParams = async (req, res, next) => {
 
     Object.values(countryFound) && res.status(200).send(countryFound);
   } catch (e) {
-    res.status(400).json({ message: e });
+    return res.status(400).json({ message: e });
   }
 };
 
