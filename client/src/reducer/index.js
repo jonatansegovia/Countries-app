@@ -70,6 +70,8 @@ function rootReducer(state = initialState, action) {
             return 0;
           }
         }
+
+        return 'Ordered';
       });
       return {
         ...state,
@@ -111,8 +113,7 @@ function rootReducer(state = initialState, action) {
         if (countriesToOrderByAct[j].activities.length > 0) {
           for (let i = 0; i < countriesToOrderByAct[j].activities.length; i++) {
             if (
-              countriesToOrderByAct[j].activities[i].name.toLowerCase() ===
-              action.payload.toLowerCase()
+              countriesToOrderByAct[j].activities[i].name === action.payload
             ) {
               filteredByAct.push(countriesToOrderByAct[j]);
             }

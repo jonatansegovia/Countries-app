@@ -28,7 +28,7 @@ export default function CardById(props) {
         <h3>{subregion}</h3>
         <h2>Area of the country:</h2>
         <h3>
-          {area / 10} Million {'\u33A2'}
+          {area} Million {'\u33A2'}
         </h3>
       </div>
     </div>

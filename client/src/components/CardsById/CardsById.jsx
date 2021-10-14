@@ -13,11 +13,10 @@ export default function CardsById({ countries, loading, byParams }) {
     <div>
       {countries.length > 0 &&
         countries.map((c, idx) => (
-          <div className={s.container}>
-            <div className={s['container-innerId']} key={idx}>
+          <div className={s.container} key={idx}>
+            <div className={s['container-innerId']}>
               {byParams !== undefined && (
                 <CardById
-                  key={idx}
                   img={c.flag}
                   name={c.name}
                   continent={c.continent}
@@ -30,9 +29,9 @@ export default function CardsById({ countries, loading, byParams }) {
             </div>
             <div className={s['container-innerActivity']}>
               {c.activities && c.activities[0] ? (
-                c.activities.map((act, idx) => (
+                c.activities.map((act) => (
                   <CardActivities
-                    key={idx}
+                    key={act.name}
                     name={act.name}
                     difficulty={act.difficulty}
                     duration={act.duration}

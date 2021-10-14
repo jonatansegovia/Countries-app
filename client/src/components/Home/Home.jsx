@@ -46,23 +46,33 @@ export default function Home() {
   );
 
   const paginate = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    if (pageNumber === 1) {
+      setCurrentPage((oldState) => pageNumber + oldState);
+    }
+    if (pageNumber === -1) {
+      setCurrentPage((oldState) => pageNumber + oldState);
+    }
   };
   //--
 
   //--HANDLERS
   const handleFilterByContinent = (e) => {
     dispatch(filterCountryByContinent(e.target.value));
+    setCurrentPage(1);
   };
   const [order, setOrder] = useState('');
   const handleFilterByAlphabet = (value) => {
-    dispatch(filterByAlphabet(value));
-    setOrder(value);
+    if (countriesFounded.length > 0) {
+      dispatch(filterByAlphabet(value));
+      setOrder(value);
+      setCurrentPage(1);
+    }
   };
   const [area, setArea] = useState('');
   const handleFilterByArea = (e) => {
     dispatch(filterByArea(e.target.value));
     setArea(e.target.value);
+    setCurrentPage(1);
   };
   //--
 
@@ -112,8 +122,9 @@ export default function Home() {
       <div className={s.footer}>
         <Pagination
           countriesPerPage={countriesPerPage}
-          totalCountries={countriesFounded.length}
+          currentPage={currentPage}
           paginate={paginate}
+          totalCountries={countriesFounded}
         />
       </div>
     </div>

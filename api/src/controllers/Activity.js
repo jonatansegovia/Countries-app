@@ -1,6 +1,6 @@
 const { Country, Activities } = require('../db.js');
 
-const postActivity = async (req, res, next) => {
+const postActivity = async (req, res) => {
   try {
     const { name, difficulty, duration, season, inputCountries } = req.body;
 
@@ -25,7 +25,7 @@ const postActivity = async (req, res, next) => {
   }
 };
 
-const getActivity = async (req, res, next) => {
+const getActivity = async (req, res) => {
   try {
     const activities = await Activities.findAll();
     return res.status(200).send(activities);

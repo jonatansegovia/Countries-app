@@ -74,7 +74,6 @@ export default function ActivityCreation() {
         inputCountries: [],
       });
       setButtonPopUp(true);
-      setTimeout(() => {}, 1000);
     } else {
       alert(
         'You are trying to create an activity without filling all the fields! '
@@ -125,6 +124,7 @@ export default function ActivityCreation() {
 
       <div className={s['container__section']}>
         <section className={s.section}>
+          <h1 className={s.section__title}>My Activity</h1>
           <div>Name: {inputsForm.name}</div>
           <div>Difficulty: {inputsForm.difficulty}</div>
           <div>Duration: {inputsForm.duration}</div>

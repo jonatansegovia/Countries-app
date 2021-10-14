@@ -3,7 +3,7 @@ const { getFromDb } = require('../utils');
 
 const { Op } = require('sequelize');
 
-const getAllCountries = async (req, res, next) => {
+const getAllCountries = async (req, res) => {
   const { name } = req.query;
 
   try {
@@ -33,7 +33,7 @@ const getAllCountries = async (req, res, next) => {
   }
 };
 
-const getCountryByParams = async (req, res, next) => {
+const getCountryByParams = async (req, res) => {
   const countryIdToUp = req.params.idPais.toUpperCase();
 
   try {
