@@ -23,8 +23,10 @@ const { getFromApi } = require('./src/utils');
 
 // Syncing all the models at once.
 conn.sync({ force: true }).then(() => {
-  server.listen(3001, () => {
-    console.log('%s listening at 3001'); // eslint-disable-line no-console
+  server.listen(process.env.PORT || 3001, () => {
+    console.log(
+      `%s listening at ${process.env.PORT ? process.env.PORT : 3001}`
+    );
     getFromApi()
       .then(() => {
         console.log('Countries in DB Loaded');
