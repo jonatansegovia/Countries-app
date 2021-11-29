@@ -13,7 +13,7 @@ export const FILTER_BY_ACTIVITY = 'FILTER_BY_ACTIVITY';
 export const getCountries = () => {
   return async function (dispatch) {
     try {
-      var json = await axios('http://localhost:3001/countries');
+      var json = await axios('/countries');
       return dispatch({
         type: GET_COUNTRIES,
         payload: json.data,
@@ -27,7 +27,7 @@ export const getCountries = () => {
 export const getCountryByParams = (id) => {
   return async function (dispatch) {
     try {
-      var json = await axios(`http://localhost:3001/countries/${id}`);
+      var json = await axios(`/countries/${id}`);
       return dispatch({
         type: GET_COUNTRIES_BY_ID,
         payload: json.data,
@@ -41,7 +41,7 @@ export const getCountryByParams = (id) => {
 export const getSearch = (text) => {
   return async function (dispatch) {
     try {
-      let json = await axios(`http://localhost:3001/countries?name=${text}`);
+      let json = await axios(`/countries?name=${text}`);
       return dispatch({
         type: GET_SEARCH_ONE,
         payload: json.data,
@@ -55,7 +55,7 @@ export const getSearch = (text) => {
 export const getActivities = () => {
   return async function (dispatch) {
     try {
-      const json = await axios('http://localhost:3001/activity');
+      const json = await axios('/activity');
       return dispatch({
         type: GET_ACTIVITIES,
         payload: json.data,
@@ -104,7 +104,7 @@ export function filterByActivity(act) {
 export const postActivity = (body) => {
   return async function (dispatch) {
     try {
-      const json = await axios.post('http://localhost:3001/activity', body);
+      const json = await axios.post('/activity', body);
       return json;
     } catch (err) {
       console.error('ERROR', err);
