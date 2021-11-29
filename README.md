@@ -6,7 +6,7 @@
 
 <p align="center">
   <img style="border-radius: 5px; -webkit-box-shadow: 0px 0px 7px 0px #000000;
-  box-shadow: 0px 0px 7px 0px #000000;" height="250" src="./imgs/start-screen.png" />
+  box-shadow: 0px 0px 7px 0px #000000;" height="250" src="./images/home.PNG" />
 </p>
 
 ## Descripción
