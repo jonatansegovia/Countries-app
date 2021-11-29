@@ -2,7 +2,7 @@
   display: grid;
   grid-template-areas: 'aside section';
   grid-template-rows: 50px 1fr 50px;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: 320px 1fr;
 }
 
 .container__section {
@@ -12,6 +12,18 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+}
+
+.container__form {
+  background: rgba(0, 0, 0, 0.842);
+  height: 100vh;
+  grid-area: aside;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: aliceblue;
+  gap: 1rem;
 }
 
 .section {
@@ -79,4 +91,9 @@
   align-items: center;
   color: rgb(243, 233, 233);
   gap: 0.5rem;
+}
+
+.create-btn {
+  padding: 0.5rem;
+  border-radius: 4px;
 }

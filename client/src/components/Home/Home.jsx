@@ -14,11 +14,11 @@ import SearchBar from '../SearchBar/SearchBar';
 import Cards from '../Cards/Cards';
 import Pagination from '../Pagination/Pagination';
 import FilterForActivities from '../FilterForActivities/FilterForActivities';
-import FilterByAlphabet from '../FilterByAlphabet/FilterByAlphabet';
-import FilterByContinent from '../FilterByContinent/FilterByContinent';
+// import FilterByAlphabet from '../FilterByAlphabet/FilterByAlphabet';
+// import FilterByContinent from '../FilterByContinent/FilterByContinent';
 
 import s from './Home.module.css';
-import FilterByArea from '../FilterByArea/FilterByArea';
+// import FilterByArea from '../FilterByArea/FilterByArea';
 
 export default function Home() {
   const dispatch = useDispatch();
@@ -95,15 +95,45 @@ export default function Home() {
 
       <aside className={s.aside}>
         <div className={s['aside-boxes']}>
-          <FilterByAlphabet handleFilterByAlphabet={handleFilterByAlphabet} />
+          <label htmlFor="forAlphabet">Alphabet: </label>
+          <select
+            id="forAlphabet"
+            onChange={(e) => handleFilterByAlphabet(e.target.value)}
+          >
+            <option selected={true} disabled="disabled">
+              ---
+            </option>
+            <option value="ascending">A-Z</option>
+            <option value="descending">Z-A</option>
+          </select>
         </div>
         <div className={s['aside-boxes']}>
-          <FilterByContinent
-            handleFilterByContinent={handleFilterByContinent}
-          />
+          <label htmlFor="forContinents">Continent: </label>
+          <select
+            id="forContinents"
+            onChange={(e) => handleFilterByContinent(e)}
+          >
+            <option selected={true} disabled="disabled">
+              ---
+            </option>
+            <option value="All">All Countries</option>
+            <option value="Europe">Europe</option>
+            <option value="Oceania">Oceania</option>
+            <option value="Americas">Americas</option>
+            <option value="Africa">Africa</option>
+            <option value="Asia">Asia</option>
+            <option value="Antarctic">Antarctic</option>
+          </select>
         </div>
         <div className={s['aside-boxes']}>
-          <FilterByArea handleFilterByArea={handleFilterByArea} />
+          <label htmlFor="forArea">Area: </label>
+          <select id="forArea" onChange={(e) => handleFilterByArea(e)}>
+            <option selected={true} disabled="disabled">
+              ---
+            </option>
+            <option value="ascending">Smallest Countries to Biggest</option>
+            <option value="descending">Biggest Countries to Smallest</option>
+          </select>
         </div>
         <FilterForActivities />
         <button type="reset" onClick={handleRestart}>

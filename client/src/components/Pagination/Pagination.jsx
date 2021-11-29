@@ -19,7 +19,6 @@ export default function Pagination({
     pageNumbers.push(i);
   }
 
-  console.log(pageNumbers);
   return (
     <div className={s['container-pages']}>
       <nav className={s['container-pages__nav']}>
