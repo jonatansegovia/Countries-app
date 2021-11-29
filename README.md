@@ -61,7 +61,7 @@ Para el front no se requieren de configuraciones adicionales. Ejecutar <strong>n
 
 ### <u>Home</u>
 
-<img  style="border-radius: 5px;" src="./images/home2.png"/>
+<img  style="border-radius: 5px;" src="./images/home2.PNG"/>
 
 Pantalla principal de la app. Se muestran los primeros 9 resultados que devuelve la api externa, junto con el resto de países que ya se encuentren en la base de datos. Incluye una navbar con una barra de búsqueda por coincidencia de carácteres (pueden utilizarse mayúsculas o minúsculas indistintamente). También, una barra lateral, con la posibilidad de aplicar filtros, tanto a los resultados por default, como a los resultados de la búsqueda en general. Las búsquedas cuentan con un paginado en su parte inferior.
 
@@ -69,7 +69,7 @@ Pantalla principal de la app. Se muestran los primeros 9 resultados que devuelve
 
 ### <u>Create</u>
 
-<img  style="border-radius: 5px;" src="./images/create.png"/>
+<img  style="border-radius: 5px;" src="./images/create.PNG"/>
 
 Pantalla de creación de una actividad turística. Un formulario controlado, en donde todos los campos son requeridos para la creación del formulario. Luego de la creación, sale un pequeño Popup indicando el resultado de la creación.
 
@@ -77,7 +77,7 @@ Pantalla de creación de una actividad turística. Un formulario controlado, en 
 
 ### <u>Country detail</u>
 
-<img  style="border-radius: 5px;" src="./images/detail.png"/>
+<img  style="border-radius: 5px;" src="./images/detail.PNG"/>
 
 Pantalla con el detalle del país seleccionado. Se muestran más detalles que en la pantalla principal, como el continente al cual pertenece, la capital del mismo, y el área de este país. También acá podremos ver si ese país está asociado a alguna actividad turística. En caso de ser negativo, este invitará al usuario a crearla.
 
@@ -85,7 +85,7 @@ Pantalla con el detalle del país seleccionado. Se muestran más detalles que en
 
 ### <u>Filters</u>
 
-<img  style="border-radius: 5px;" src="./imgs/filters.gif"/>
+<img  style="border-radius: 5px;" src="./images/filters.PNG"/>
 
 Funcionalidad de filtros. Se puede filtrar por Continente, por actividad turística, por mayor o menor área y aplicar un ordenamiento alfabético (A-Z o Z-A).
 
@@ -93,15 +93,13 @@ Funcionalidad de filtros. Se puede filtrar por Continente, por actividad turíst
 
 ### <u>Pages</u>
 
-<img  style="border-radius: 5px;" src="./imgs/pages.gif"/>
+<img  style="border-radius: 5px;" src="./images/pagess.PNG"/>
 
 Funcionalidad de paginado. Es posible avanzar por páginas, tanto para mostrar todos los resultados, como para mostrar los filtros. La cantidad de países por página es de 9.
 
 <br />
 
 ### <u>Responsive</u>
-
-<img  style="border-radius: 5px;" src="./imgs/responsive.gif"/>
 
 La web NO esta configurada para funcionar responsivamente.
 
