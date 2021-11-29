@@ -57,3 +57,60 @@ Para el front no se requieren de configuraciones adicionales. Ejecutar <strong>n
 
 <br />
 
+## Presentación y funcionalidades
+
+### <u>Home</u>
+
+<video width="500px" height="500px" controls="controls"/><source src="./images/home-vide.webm" type="video/mp4"></video> 
+
+Pantalla principal de la app. Se muestran los primeros 9 resultados que devuelve la api externa, junto con el resto de países que ya se encuentren en la base de datos. Incluye una navbar con una barra de búsqueda por coincidencia de carácteres (pueden utilizarse mayúsculas o minúsculas indistintamente). También, una barra lateral, con la posibilidad de aplicar filtros, tanto a los resultados por default, como a los resultados de la búsqueda en general. Las búsquedas cuentan con un paginado en su parte inferior.
+
+<br />
+
+### <u>Create</u>
+
+<img  style="border-radius: 5px;" src="./imgs/create.gif"/>
+
+Pantalla de creación de un videogame. Un formulario controlado, en donde los campos Name, Description, Genres y Platforms son requeridos, el resto de campos no son obligatorios. Luego de la creación, sale un pequeño Popup indicando el resultado de la creación.
+
+<br />
+
+### <u>Game detail</u>
+
+<img  style="border-radius: 5px;" src="./imgs/detail.gif"/>
+
+Pantalla de detalle de un videogame. Se muestran más detalles que en la pantalla principal, como la descripción del mismo, la foto en mayor resolución, fecha de lanzamiento y otros datos.
+
+<br />
+
+### <u>Search</u>
+
+<img  style="border-radius: 5px;" src="./imgs/search.gif"/>
+
+Funcionalidad de búsqueda. Devuelve los primeros 15 resultados que contengan el nombre buscado. Los 15 resultados devueltos incluyen aquellos juegos que se encuentren en la DB, ej, si se busca la palabra "Fifa", va a buscar 15 resultados en la api, 15 resultados en la DB, y el resultado final, será la unión de esos 15 resultados ordenados alfabéticamente. Se pueden aplicar los filtros a la búsqueda. Para reiniciar, se puede utilizar el botón reset.
+
+<br />
+
+### <u>Filters</u>
+
+<img  style="border-radius: 5px;" src="./imgs/filters.gif"/>
+
+Funcionalidad de filtros. Se puede filtrar por Género de videogame, por pertenencia (DB o API), y aplicar un ordenamiento, sea Alfabético (A-Z o Z-A) o por Rating.
+
+<br />
+
+### <u>Pages</u>
+
+<img  style="border-radius: 5px;" src="./imgs/pages.gif"/>
+
+Funcionalidad de paginado. Es posible avanzar por páginas, tanto para mostrar todos los resultados, como para mostrar los filtros. La cantidad de juegos por páginas es de 15.
+
+<br />
+
+### <u>Responsive</u>
+
+<img  style="border-radius: 5px;" src="./imgs/responsive.gif"/>
+
+La web NO esta configurada para funcionar responsivamente.
+
+
