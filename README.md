@@ -61,7 +61,7 @@ Para el front no se requieren de configuraciones adicionales. Ejecutar <strong>n
 
 ### <u>Home</u>
 
-<img  style="border-radius: 5px;" src="./images/home.gif"/>
+<img  style="border-radius: 5px;" src="./images/home2.png"/>
 
 Pantalla principal de la app. Se muestran los primeros 9 resultados que devuelve la api externa, junto con el resto de países que ya se encuentren en la base de datos. Incluye una navbar con una barra de búsqueda por coincidencia de carácteres (pueden utilizarse mayúsculas o minúsculas indistintamente). También, una barra lateral, con la posibilidad de aplicar filtros, tanto a los resultados por default, como a los resultados de la búsqueda en general. Las búsquedas cuentan con un paginado en su parte inferior.
 
@@ -69,25 +69,17 @@ Pantalla principal de la app. Se muestran los primeros 9 resultados que devuelve
 
 ### <u>Create</u>
 
-<img  style="border-radius: 5px;" src="./imgs/create.gif"/>
+<img  style="border-radius: 5px;" src="./images/create.png"/>
 
-Pantalla de creación de un videogame. Un formulario controlado, en donde los campos Name, Description, Genres y Platforms son requeridos, el resto de campos no son obligatorios. Luego de la creación, sale un pequeño Popup indicando el resultado de la creación.
-
-<br />
-
-### <u>Game detail</u>
-
-<img  style="border-radius: 5px;" src="./imgs/detail.gif"/>
-
-Pantalla de detalle de un videogame. Se muestran más detalles que en la pantalla principal, como la descripción del mismo, la foto en mayor resolución, fecha de lanzamiento y otros datos.
+Pantalla de creación de una actividad turística. Un formulario controlado, en donde todos los campos son requeridos para la creación del formulario. Luego de la creación, sale un pequeño Popup indicando el resultado de la creación.
 
 <br />
 
-### <u>Search</u>
+### <u>Country detail</u>
 
-<img  style="border-radius: 5px;" src="./imgs/search.gif"/>
+<img  style="border-radius: 5px;" src="./images/detail.png"/>
 
-Funcionalidad de búsqueda. Devuelve los primeros 15 resultados que contengan el nombre buscado. Los 15 resultados devueltos incluyen aquellos juegos que se encuentren en la DB, ej, si se busca la palabra "Fifa", va a buscar 15 resultados en la api, 15 resultados en la DB, y el resultado final, será la unión de esos 15 resultados ordenados alfabéticamente. Se pueden aplicar los filtros a la búsqueda. Para reiniciar, se puede utilizar el botón reset.
+Pantalla con el detalle del país seleccionado. Se muestran más detalles que en la pantalla principal, como el continente al cual pertenece, la capital del mismo, y el área de este país. También acá podremos ver si ese país está asociado a alguna actividad turística. En caso de ser negativo, este invitará al usuario a crearla.
 
 <br />
 
@@ -95,7 +87,7 @@ Funcionalidad de búsqueda. Devuelve los primeros 15 resultados que contengan el
 
 <img  style="border-radius: 5px;" src="./imgs/filters.gif"/>
 
-Funcionalidad de filtros. Se puede filtrar por Género de videogame, por pertenencia (DB o API), y aplicar un ordenamiento, sea Alfabético (A-Z o Z-A) o por Rating.
+Funcionalidad de filtros. Se puede filtrar por Continente, por actividad turística, por mayor o menor área y aplicar un ordenamiento alfabético (A-Z o Z-A).
 
 <br />
 
@@ -103,7 +95,7 @@ Funcionalidad de filtros. Se puede filtrar por Género de videogame, por pertene
 
 <img  style="border-radius: 5px;" src="./imgs/pages.gif"/>
 
-Funcionalidad de paginado. Es posible avanzar por páginas, tanto para mostrar todos los resultados, como para mostrar los filtros. La cantidad de juegos por páginas es de 15.
+Funcionalidad de paginado. Es posible avanzar por páginas, tanto para mostrar todos los resultados, como para mostrar los filtros. La cantidad de países por página es de 9.
 
 <br />
 
