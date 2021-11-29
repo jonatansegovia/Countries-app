@@ -61,7 +61,7 @@ Para el front no se requieren de configuraciones adicionales. Ejecutar <strong>n
 
 ### <u>Home</u>
 
-<video width="500px" height="500px" controls="controls"/><source src="./images/home-video.webm" type="video/mp4"></video> 
+<img  style="border-radius: 5px;" src="./images/home.gif"/>
 
 Pantalla principal de la app. Se muestran los primeros 9 resultados que devuelve la api externa, junto con el resto de países que ya se encuentren en la base de datos. Incluye una navbar con una barra de búsqueda por coincidencia de carácteres (pueden utilizarse mayúsculas o minúsculas indistintamente). También, una barra lateral, con la posibilidad de aplicar filtros, tanto a los resultados por default, como a los resultados de la búsqueda en general. Las búsquedas cuentan con un paginado en su parte inferior.
 
