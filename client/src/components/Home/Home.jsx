@@ -145,7 +145,7 @@ export default function Home() {
         {countriesFounded.length > 0 ? (
           <Cards countries={currentCountry} loading={loading} />
         ) : (
-          <span className={s.message}>Ops! Country not found, try again!</span>
+          <Cards loading={true} />
         )}
       </section>
 

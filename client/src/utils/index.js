@@ -1,10 +1,11 @@
 function validate(input) {
   let error = {};
 
-  var regName = /^[a-zA-Z]+$/;
+  var regName = /[A-Za-z0-9]+/g;
   var regNumberBetween = /^[1-5]+$/;
   const regInteger = /^\d+$/;
 
+  console.log(input.name);
   if (!regName.test(input.name)) {
     error.name = 'Name is required';
   } else if (!regNumberBetween.test(input.difficulty)) {
@@ -19,6 +20,7 @@ function validate(input) {
     error.inputCountries = 'At least one country is required';
   }
 
+  console.log('ERROR', error);
   return error;
 }
 

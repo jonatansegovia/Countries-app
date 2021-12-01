@@ -5,7 +5,9 @@ import Card from '../Card/Card';
 import s from './Cards.module.css';
 
 export default function Cards({ countries, loading }) {
-  loading && <h2>Loading...</h2>;
+  if (loading) {
+    return <h2>Loading...</h2>;
+  }
 
   return (
     <div>
